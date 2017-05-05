@@ -17,7 +17,7 @@ public class PizzaTests {
 	
 	@Before
 	public void setup() {
-		mlPizza = new MeatLoversPizza(0, null, null)
+		mlPizza = new MeatLoversPizza(0, null, null);
 		
 	}
 }
