@@ -29,7 +29,7 @@ public class DroneDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DroneDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		// TO DO		
+		super(name, mobileNumber, locationX, locationY, "Drone Delivery" );	
 	}
 
 	/**
@@ -40,8 +40,8 @@ public class DroneDeliveryCustomer extends Customer {
 	 */
 	@Override
 	public double getDeliveryDistance() {
-		// TO DO
-
+		// Euclidean dist((x, y), (a, b)) = sqrt((x - a)² + (y - b)²)
+		return Math.sqrt(Math.pow(getLocationX() - 0, 2) + (Math.pow(getLocationY() - 0, 2)));
 	}
 	
 

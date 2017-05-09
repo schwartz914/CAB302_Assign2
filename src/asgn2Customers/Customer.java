@@ -1,5 +1,6 @@
 package asgn2Customers;
 
+
 import asgn2Exceptions.CustomerException;
 
 /** An abstract class to represent a customer at the Pizza Palace restaurant.
@@ -11,7 +12,11 @@ import asgn2Exceptions.CustomerException;
  * @author Person B
 */
 public abstract class Customer {
-
+	private String customerName;
+	private String mobileNo;
+	private int locX;
+	private int locY;
+	private String cusType;
 
 	/**
 	 *  This class represents a customer of the Pizza Palace restaurant.  A detailed description of the class's fields
@@ -31,7 +36,21 @@ public abstract class Customer {
 	 * 
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		// TO DO
+		if(name.length() <= 20 || name.length() <= 1) {
+			customerName = name;
+		} else {
+			throw new CustomerException("Customer name is invalid");
+		}
+		
+		if(mobileNumber.matches("0[0-9]{9}")) {
+			mobileNo = mobileNumber;
+		} else {
+			throw new CustomerException("Customer phone is invalid");
+		}
+		//Need to check if distance is too great
+		locX = locationX;
+		locY = locationY;
+		cusType = type;
 	}
 	
 	/**
@@ -39,7 +58,7 @@ public abstract class Customer {
 	 * @return The Customer's name.
 	 */
 	public final String getName(){
-		// TO DO
+		return customerName;
 	}
 	
 	/**
@@ -47,7 +66,7 @@ public abstract class Customer {
 	 * @return The Customer's mobile number.
 	 */
 	public final String getMobileNumber(){
-		// TO DO
+		return mobileNo;
 	}
 
 	/**
@@ -56,7 +75,7 @@ public abstract class Customer {
 	 * @return A human understandable description of the Customer's type.
 	 */
 	public final String getCustomerType(){
-		// TO DO
+		return cusType;
 	}
 	
 	/**
@@ -65,7 +84,7 @@ public abstract class Customer {
 	 * @return The Customer's X location
 	 */
 	public final int getLocationX(){
-		// TO DO
+		return locX;
 	}
 
 	/**
@@ -74,7 +93,7 @@ public abstract class Customer {
 	 * @return The Customer's Y location
 	 */
 	public final int getLocationY(){
-		// TO DO
+		return locY;
 	}
 
 	/**
