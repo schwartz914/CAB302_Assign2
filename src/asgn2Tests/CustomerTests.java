@@ -1,7 +1,5 @@
 package asgn2Tests;
 
-import java.time.LocalTime;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,8 +7,6 @@ import asgn2Customers.DriverDeliveryCustomer;
 import asgn2Customers.DroneDeliveryCustomer;
 import asgn2Customers.PickUpCustomer;
 import asgn2Exceptions.CustomerException;
-import asgn2Exceptions.PizzaException;
-import asgn2Pizzas.MeatLoversPizza;
 import static org.junit.Assert.*;
 
 /**
