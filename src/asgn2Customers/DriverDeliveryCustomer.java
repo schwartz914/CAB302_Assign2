@@ -40,7 +40,7 @@ public class DriverDeliveryCustomer extends Customer {
 	@Override
 	public double getDeliveryDistance() {
 		//Manahatten Delivery
-		return Math.abs(getLocationX() + getLocationY());
+		return Math.abs(getLocationX()) + Math.abs(getLocationY());
 	}
 
 }
