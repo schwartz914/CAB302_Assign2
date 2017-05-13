@@ -2,6 +2,8 @@ package asgn2Pizzas;
 
 import java.time.LocalTime;
 
+import asgn2Exceptions.PizzaException;
+
 
 /**
  * An abstract class that represents pizzas sold at the Pizza Palace restaurant. 
@@ -13,6 +15,10 @@ import java.time.LocalTime;
  *
  */
 public abstract class Pizza  {
+	private int quantity;
+	private String type;
+	private double price, cost;
+	private LocalTime orderTime, deliveryTime;
 	
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
@@ -32,7 +38,29 @@ public abstract class Pizza  {
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
-		// TO DO	
+		// TO DO
+		if(quantity > 0 && quantity < 10){
+			this.quantity = quantity;
+		}else{
+			throw new PizzaException("Pizza Exception: Quantity of pizzas invalid; must order atleast 1 but no more than 10.");
+		}
+		
+		if(type != "Margherita" || type != "Vegetarian" || type != "Meat Lovers”"){
+			this.type = type;
+		}else{
+			throw new PizzaException("Pizza Exception: The type of pizza is invalid.");
+		}
+		if(LocalTime.of(23, 00, 00).isAfter(orderTime) && LocalTime.of(07, 00, 00).isBefore(orderTime)){
+			this.orderTime = orderTime;
+		}else{
+			throw new PizzaException("Pizza Exception: Orders cannot be placed after 11:00pm.");
+		}
+		// MAY NEED TO EVALUATE deliveryTime
+		
+		// Assign values
+		this.price = price; //Pretty sure this gets assigned in calculate cost
+		this.deliveryTime = deliveryTime;
+		
 	}
 
 	/**
@@ -43,6 +71,14 @@ public abstract class Pizza  {
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
+		
+		if (this.getPizzaType() == "Margherita"){
+			this.cost = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost();			
+		}else if(this.getPizzaType() == "Meat Lovers"){
+			this.cost = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost() + PizzaTopping.BACON.getCost() + PizzaTopping.PEPPERONI.getCost() + PizzaTopping.SALAMI.getCost();
+		}else{
+			this.cost = PizzaTopping.CHEESE.getCost() + PizzaTopping.TOMATO.getCost() + PizzaTopping.EGGPLANT.getCost() + PizzaTopping.CAPSICUM.getCost() + PizzaTopping.MUSHROOM.getCost();
+		}
 	}
 	
 	/**
@@ -51,6 +87,8 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
+		this.calculateCostPerPizza(); //MIGHT NOT NEED THIS LINE
+		return this.cost;
 	}
 
 	/**
@@ -59,6 +97,7 @@ public abstract class Pizza  {
 	 */
 	public final double getPricePerPizza(){
 		// TO DO
+		return this.price;
 	}
 
 	/**
@@ -67,6 +106,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
+		return this.cost * this.quantity;
 	}
 	
 	/**
@@ -75,6 +115,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
+		return this.price * this.quantity;
 	}
 	
 	
@@ -84,6 +125,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderProfit(){
 		// TO DO
+		return this.getOrderPrice() - this.getOrderCost();
 	}
 	
 
@@ -94,6 +136,15 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
 		// TO DO
+		if(this.getPizzaType() == "Margherita" && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO)){
+			return true;
+		}else if(this.getPizzaType() == "Meat Lovers" && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO || topping == PizzaTopping.BACON || topping == PizzaTopping.PEPPERONI || topping == PizzaTopping.SALAMI)){
+			return true;
+		}else if(this.getPizzaType() == "Vegetarian" && (topping == PizzaTopping.CHEESE || topping == PizzaTopping.TOMATO || topping == PizzaTopping.EGGPLANT || topping == PizzaTopping.MUSHROOM || topping == PizzaTopping.CAPSICUM)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	/**
@@ -102,6 +153,7 @@ public abstract class Pizza  {
 	 */
 	public final int getQuantity(){
 		// TO DO
+		return this.quantity;
 	}
 
 	/**
@@ -111,6 +163,7 @@ public abstract class Pizza  {
 	 */
 	public final String getPizzaType(){
 		// TO DO
+		return this.type;
 	}
 
 
