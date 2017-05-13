@@ -1,12 +1,20 @@
 package asgn2Restaurant;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaFactory;
 
 /**
  *
@@ -19,7 +27,7 @@ import asgn2Pizzas.Pizza;
  */
 public class LogHandler {
 	
-
+	private static ArrayList<Pizza> pizzas;
 
 	/**
 	 * Returns an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file.
@@ -43,6 +51,21 @@ public class LogHandler {
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
 		// TO DO
+		pizzas = new ArrayList<Pizza>();
+		
+		String filePath = "../../logs/" + filename;
+		Path path = Paths.get(filePath);
+		Charset charset = Charset.forName("US-ASCII");
+		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
+		    String line = null;
+		    while ((line = reader.readLine()) != null) {
+		    	pizzas.add(LogHandler.createPizza(line));
+		       // System.out.println(line);
+		    }
+		} catch (IOException x) {
+		    System.err.format("IOException: %s%n", x);
+		}
+		return pizzas;
 	}		
 
 	
@@ -67,7 +90,26 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
-		// TO DO		
+		// TO DO
+		String pizzaCode;
+		LocalTime orderTime, deliveryTime;
+		int quantity;
+		int numberCommas = 8;
+		int[] breakIndexes = new int[numberCommas];
+		int previousComma = 0;
+		for (int i = 0; i < breakIndexes.length; i++){
+			breakIndexes[i] = line.indexOf(",", previousComma + 1);
+			if(i != 0){
+				previousComma = breakIndexes[i-1];
+			}
+		}
+		
+		orderTime = LocalTime.parse(line.substring(0, breakIndexes[0] - 1));
+		deliveryTime = LocalTime.parse(line.substring(breakIndexes[0] + 1, breakIndexes[1] - 1));
+		pizzaCode = line.substring(breakIndexes[6] + 1, breakIndexes[7] - 1);
+		quantity = Integer.parseInt(line.substring(breakIndexes[7] + 1));		
+		
+		return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 	}
 
 }
