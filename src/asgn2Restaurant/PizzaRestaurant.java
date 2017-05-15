@@ -36,6 +36,7 @@ public class PizzaRestaurant {
 	 */
 	public PizzaRestaurant() {
 		// TO DO
+		this.pizzas = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -55,6 +56,17 @@ public class PizzaRestaurant {
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
+		try{
+			//NEED TO ADD POPULATE FOR CUSTOMER
+			LogHandler.populatePizzaDataset(filename);
+			return true;
+		}catch(LogHandlerException exception){
+			
+			System.err.println(exception.getMessage());
+			
+			return false;
+		}
+		
 	}
 
 	/**
@@ -75,6 +87,11 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
+		if (!this.pizzas.isEmpty() && index >= 0 && index < this.pizzas.size()){
+			return this.pizzas.get(index);
+		}else{
+			throw new PizzaException("PizzaException: The index is invalid.");
+		}
 	}
 	
 	/**
@@ -85,6 +102,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumPizzaOrders(){
 		// TO DO
+		return this.pizzas.size();
 	}
 
 	/**
@@ -115,6 +133,11 @@ public class PizzaRestaurant {
 	 */	
 	public double getTotalProfit(){
 		// TO DO
+		double profit = 0;
+		for(Pizza pizza : this.pizzas){
+			profit += pizza.getOrderProfit();
+		}
+		return profit;
 	}
 	
 	/**
@@ -125,6 +148,7 @@ public class PizzaRestaurant {
 	 */
 	public void resetDetails(){
 		// TO DO
+		this.pizzas.clear();
 	}
 
 }
