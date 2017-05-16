@@ -26,7 +26,7 @@ public class PizzaTests {
 	@Before
 	public void setup() throws PizzaException {
 		mlPizza = new MeatLoversPizza(1, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
-		mlPizza2 = new MeatLoversPizza(5, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
+		mlPizza2 = new MeatLoversPizza(2, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
 	}
 	
 	@Test(expected = PizzaException.class)
@@ -76,7 +76,7 @@ public class PizzaTests {
 	
 	@Test
 	public void returnString() {
-		String expected = "Meatlovers";
+		String expected = "Meat Lovers";
 		assertEquals(expected, mlPizza.getPizzaType());
 	}
 	@Test
