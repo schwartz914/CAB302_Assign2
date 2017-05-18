@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
+import asgn2Customers.CustomerFactory;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
@@ -28,6 +29,7 @@ import asgn2Pizzas.PizzaFactory;
 public class LogHandler {
 	
 	private static ArrayList<Pizza> pizzas;
+	private static ArrayList<Customer> customers;
 
 	/**
 	 * Returns an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file.
@@ -35,10 +37,25 @@ public class LogHandler {
 	 * @return an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file. 
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
 	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
+	 * @throws  
 	 * 
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
+		customers = new ArrayList<Customer>();
+		String filePath = "../../logs/" + filename;
+		Path path = Paths.get(filePath);
+		Charset charset = Charset.forName("US-ASCII");
+		try(BufferedReader reader = Files.newBufferedReader(path, charset)) {
+			String line = null;
+			while((line = reader.readLine()) != null) {
+				customers.add(LogHandler.createCustomer(line));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.format("IOException: %s%n", e);
+		}
+		return customers;
 	}		
 
 	/**
@@ -79,6 +96,18 @@ public class LogHandler {
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		// TO DO
+		
+		String[] lineArray = line.split(",");
+
+		String customerCode = lineArray[7];
+		String name = lineArray[2];
+		String mobileNumber = lineArray[3];
+		int locX = Integer.parseInt(lineArray[5]);
+		int locY = Integer.parseInt(lineArray[6]);
+
+		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
+		
+		
 	}
 	
 	/**

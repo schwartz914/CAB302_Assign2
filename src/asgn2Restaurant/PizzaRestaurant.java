@@ -37,6 +37,7 @@ public class PizzaRestaurant {
 	public PizzaRestaurant() {
 		// TO DO
 		this.pizzas = new ArrayList<Pizza>();
+		this.customers = new ArrayList<Customer>();
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class PizzaRestaurant {
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
 		try{
-			//NEED TO ADD POPULATE FOR CUSTOMER
+			LogHandler.populateCustomerDataset(filename);
 			LogHandler.populatePizzaDataset(filename);
 			return true;
 		}catch(LogHandlerException exception){
@@ -65,7 +66,7 @@ public class PizzaRestaurant {
 			System.err.println(exception.getMessage());
 			
 			return false;
-		}
+		} //Do We need to add multiple catch statements for Pizza and customer exceptions
 		
 	}
 

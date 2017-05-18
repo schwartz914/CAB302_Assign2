@@ -1,6 +1,7 @@
 package asgn2Tests;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import asgn2Restaurant.PizzaRestaurant;
 
@@ -12,9 +13,16 @@ import asgn2Restaurant.PizzaRestaurant;
  *
  */
 public class RestaurantPizzaTests {
-
+	
+	PizzaRestaurant pr;
+	
 	@Before
 	public void Setup(){
-		PizzaRestaurant pr = new PizzaRestaurant();
+		pr = new PizzaRestaurant();
+	}
+	
+	@Test
+	public void testCase() {
+		
 	}
 }
