@@ -32,7 +32,7 @@ public class LogHandlerCustomerTests {
 		// If order-time & delivery time incorrect format hh:mm:ss
 		@Test(expected = CustomerException.class)
 		public void deliveryTimeCorrectForm() throws CustomerException, PizzaException, LogHandlerException {
-			assertEquals(LogHandler.populateCustomerDataset("delivery-timeWrongFormat.txt"), Customer.class);
+			assertEquals(LogHandler.populateCustomerDataset("delivery-timeWrongFormat.txt"), Customer.class); 
 		}
 		@Test(expected = CustomerException.class)
 		public void orderTimeCorrectForm() throws CustomerException, PizzaException, LogHandlerException {

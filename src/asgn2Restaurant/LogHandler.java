@@ -49,7 +49,7 @@ public class LogHandler {
 		try(BufferedReader reader = Files.newBufferedReader(path, charset)) {
 			String line = null;
 			while((line = reader.readLine()) != null) {
-				customers.add(LogHandler.createCustomer(line));
+				customers.add(createCustomer(line));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

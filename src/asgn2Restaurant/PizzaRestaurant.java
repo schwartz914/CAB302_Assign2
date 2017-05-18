@@ -58,8 +58,8 @@ public class PizzaRestaurant {
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
 		try{
-			LogHandler.populateCustomerDataset(filename);
-			LogHandler.populatePizzaDataset(filename);
+			customers = LogHandler.populateCustomerDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
 			return true;
 		}catch(LogHandlerException exception){
 			
@@ -77,7 +77,11 @@ public class PizzaRestaurant {
 	 * @throws CustomerException if index is invalid.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
-		// TO DO
+		if(index < 0 || index > this.customers.size()) {
+			throw new CustomerException("Customer Exception: The index is invalid.");
+		} else {
+			return this.customers.get(index);
+		}
 	}
 	
 	/**
