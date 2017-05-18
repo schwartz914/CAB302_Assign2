@@ -19,6 +19,24 @@ import asgn2Pizzas.PizzaTopping;
  * @author Person B
  *
  */
+
+/*
+ * Pizza Topping Price ($)
+Margherita 		Tomato, Cheese 									1.50		8.00
+Vegetarian 		Tomato, Cheese, Eggplant, Mushroom, Capsicum	5.50		10.00
+Meat Lovers 	Tomato, Cheese, Bacon, Pepperoni, Salami		5.00		12.00
+Pizzas, Ingredients and Prices
+Topping Cost ($)
+Cheese		1
+Tomato		0.5
+Bacon		1.5
+Salami		1
+Pepperoni	1
+Capsicum	1.2
+Mushroom	2
+Eggplant	0.8
+ * 
+ */
 public class PizzaTests {
 	MeatLoversPizza mlPizza;
 	MeatLoversPizza mlPizza2;
@@ -30,11 +48,30 @@ public class PizzaTests {
 	}
 	
 	@Test(expected = PizzaException.class)
-	public void throwsException() throws PizzaException {
+	public void negPizzasException() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(-1, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
+	}
+	
+	@Test
+	public void edgePizzaQty() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(10, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
+		assertEquals(10, mlPizza3.getQuantity());
+	}
+	
+	@Test(expected = PizzaException.class)
+	public void excessPizzaException() throws PizzaException {
 		MeatLoversPizza mlPizza3;
 		mlPizza3 = new MeatLoversPizza(11, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
 	}
 	
+	@Test
+	public void validQuantity() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
+		assertEquals(2, mlPizza3.getQuantity());
+	}
 
 	@Test
 	public void CalculateCost() {
