@@ -38,6 +38,10 @@ import java.awt.event.MouseEvent;
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtCustomername;
 	private JTextField txtMobilenumber;

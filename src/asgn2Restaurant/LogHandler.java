@@ -44,9 +44,6 @@ public class LogHandler {
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
 		customers = new ArrayList<Customer>();
-		/*String filePath = "\\logs\\" + filename;
-		Path path = Paths.get(filePath);
-		Charset charset = Charset.forName("US-ASCII");*/
 		String path = "logs\\" + filename;
 		try {
 		FileReader fr = new FileReader(path);
@@ -60,7 +57,7 @@ public class LogHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.format("IOException: %s%n", e);
-		}
+		} //Must setup to throw LogHandler exception.
 		return customers;
 	}		
 
