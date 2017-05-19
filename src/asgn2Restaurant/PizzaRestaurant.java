@@ -24,6 +24,7 @@ public class PizzaRestaurant {
 
 	private ArrayList<Customer> customers;
 	private ArrayList<Pizza> pizzas;
+	//private ArrayList<PizzaRestaurant> pizzaRestaurant;
 
 	
 	/**
@@ -35,9 +36,10 @@ public class PizzaRestaurant {
 	 * 
 	 */
 	public PizzaRestaurant() {
-		// TO DO
+		//pizzaRestaurant = new ArrayList<PizzaRestaurant>();
 		this.pizzas = new ArrayList<Pizza>();
 		this.customers = new ArrayList<Customer>();
+		
 	}
 
 	/**
@@ -118,6 +120,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
+		return 0;
 	}
 
 			
@@ -128,7 +131,8 @@ public class PizzaRestaurant {
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
 	public double getTotalDeliveryDistance(){
-		// TO DO
+		//TODO
+		return 0.00;
 	}
 
 	/**
