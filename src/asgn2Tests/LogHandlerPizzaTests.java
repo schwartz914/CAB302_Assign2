@@ -2,6 +2,8 @@ package asgn2Tests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,11 +38,28 @@ public class LogHandlerPizzaTests {
 	
 	@Test
 	public void workingFileTest() throws PizzaException, LogHandlerException, CustomerException {
-		Customer expected = new DroneDeliveryCustomer("Casey Jones", "0123456789", 5, 5);
 		boolean result = pizzaPalace.processLog("20170101.txt");
-		String value = pizzaPalace.getCustomerByIndex(0).getName();
-		assertEquals(value, expected.getName());
-		
-		
+		assertTrue(result);
 	}
+	
+	@Test
+	public void workingCustomer() throws PizzaException, LogHandlerException, CustomerException {
+		Customer expected = new DroneDeliveryCustomer("Casey Jones", "0123456789", 5, 5);
+		pizzaPalace.processLog("20170101.txt");
+		String value = pizzaPalace.getCustomerByIndex(0).getName();
+		assertEquals(expected.getName(), value);
+	}
+	
+	@Test (expected = CustomerException.class)
+	public void brokenFileTest() throws PizzaException, LogHandlerException, CustomerException {
+		boolean result = pizzaPalace.processLog("PizzaLogTests.txt");
+		assertTrue(result);
+	}
+	
+	@Test (expected = IOException.class)
+	public void noFileTest() throws PizzaException, LogHandlerException, CustomerException {
+		boolean result = pizzaPalace.processLog("FakeFile.txt");
+		assertTrue(result);
+	}
+	
 }

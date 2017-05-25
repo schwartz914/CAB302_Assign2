@@ -2,6 +2,7 @@ package asgn2Restaurant;
 
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -43,18 +44,20 @@ public class LogHandler {
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
 		customers = new ArrayList<Customer>();
-		String filePath = "../../logs/" + filename;
-		Path path = Paths.get(filePath);
-		Charset charset = Charset.forName("US-ASCII");
-		try(BufferedReader reader = Files.newBufferedReader(path, charset)) {
+		String path = "logs\\" + filename;
+		try {
+		FileReader fr = new FileReader(path);
+		BufferedReader reader = new BufferedReader(fr);
 			String line = null;
 			while((line = reader.readLine()) != null) {
 				customers.add(createCustomer(line));
 			}
+			
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.format("IOException: %s%n", e);
-		}
+		} //Must setup to throw LogHandler exception.
 		return customers;
 	}		
 
@@ -70,7 +73,7 @@ public class LogHandler {
 		// TO DO
 		pizzas = new ArrayList<Pizza>();
 		
-		String filePath = "../../logs/" + filename;
+		String filePath = "logs\\" + filename;
 		Path path = Paths.get(filePath);
 		Charset charset = Charset.forName("US-ASCII");
 		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
@@ -99,7 +102,7 @@ public class LogHandler {
 		
 		String[] lineArray = line.split(",");
 
-		String customerCode = lineArray[7];
+		String customerCode = lineArray[4];
 		String name = lineArray[2];
 		String mobileNumber = lineArray[3];
 		int locX = Integer.parseInt(lineArray[5]);
@@ -120,7 +123,13 @@ public class LogHandler {
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
 		// TO DO
-		String pizzaCode;
+		String lineArray[] = line.split(",");
+		String pizzaCode = lineArray[7];
+		int quantity = Integer.parseInt(lineArray[8]);
+		LocalTime  orderTime = LocalTime.parse(lineArray[0]);
+		LocalTime deliveryTime = LocalTime.parse(lineArray[1]);
+		
+		/*String pizzaCode;
 		LocalTime orderTime, deliveryTime;
 		int quantity;
 		int numberCommas = 8;
@@ -137,7 +146,7 @@ public class LogHandler {
 		deliveryTime = LocalTime.parse(line.substring(breakIndexes[0] + 1, breakIndexes[1] - 1));
 		pizzaCode = line.substring(breakIndexes[6] + 1, breakIndexes[7] - 1);
 		quantity = Integer.parseInt(line.substring(breakIndexes[7] + 1));		
-		
+		*/
 		return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 	}
 
