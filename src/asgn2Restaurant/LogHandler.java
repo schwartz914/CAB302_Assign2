@@ -44,7 +44,7 @@ public class LogHandler {
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
 		customers = new ArrayList<Customer>();
-		String path = filename;
+		String path = "logs\\" + filename;
 		try {
 		FileReader fr = new FileReader(path);
 		BufferedReader reader = new BufferedReader(fr);
@@ -72,7 +72,7 @@ public class LogHandler {
 		// TO DO
 		pizzas = new ArrayList<Pizza>();
 		
-		String filePath = filename;
+		String filePath = "logs\\" + filename;
 		Path path = Paths.get(filePath);
 		Charset charset = Charset.forName("US-ASCII");
 		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {

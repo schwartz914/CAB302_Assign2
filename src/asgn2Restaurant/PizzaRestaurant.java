@@ -60,8 +60,8 @@ public class PizzaRestaurant {
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
 		try{
-			this.customers = LogHandler.populateCustomerDataset(filename);
-			this.pizzas = LogHandler.populatePizzaDataset(filename);
+			customers = LogHandler.populateCustomerDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
 			return true;
 		}catch(LogHandlerException exception){
 			
@@ -120,7 +120,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
-		return this.customers.size();
+		return 0;
 	}
 
 			
@@ -132,7 +132,7 @@ public class PizzaRestaurant {
 	 */
 	public double getTotalDeliveryDistance(){
 		//TODO
-		return 0.00; //NEED TO FIX THIS UP
+		return 0.00;
 	}
 
 	/**
