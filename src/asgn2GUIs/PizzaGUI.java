@@ -22,6 +22,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 /**
@@ -55,7 +57,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField txtProfit;
 	private JTextField totalProfitF;
 	private JTextField totalDistanceF;
+	private JTextArea txtrWelcomeToPizza;
+	private JComboBox<Integer> customerComboBox;
 	private PizzaRestaurant restaurant;
+	private boolean pizzaLoaded;
 	
 	
 	/**
@@ -64,6 +69,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 */
 	public PizzaGUI(String title) {
 		// TODO
+		restaurant = new PizzaRestaurant();
+		pizzaLoaded = false;
 		
 		
 		// ----- Create JFrame ----- 
@@ -163,11 +170,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		lblTotalCustomers.setBounds(299, 197, 120, 14);
 		contentPane.add(lblTotalCustomers);
 		
-		JLabel label = new JLabel("0");
-		label.setEnabled(false);
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(324, 222, 46, 14);
-		contentPane.add(label);		
+		JLabel lblCustomerTot = new JLabel("0");
+		lblCustomerTot.setEnabled(false);
+		lblCustomerTot.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCustomerTot.setBounds(324, 222, 46, 14);
+		contentPane.add(lblCustomerTot);		
 		
 		JLabel lblTotalProfit = new JLabel("Total Profit:");
 		lblTotalProfit.setBounds(10, 14, 84, 14);
@@ -188,7 +195,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		
 		// ----- Create and Add JComboBox -----
-		JComboBox customerComboBox = new JComboBox();
+		customerComboBox = new JComboBox<Integer>();
 		customerComboBox.setEnabled(false);
 		customerComboBox.setBounds(297, 152, 100, 22);
 		contentPane.add(customerComboBox);
@@ -322,6 +329,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Change fields to correct values
+				totalProfitF.setText(Double.toString(restaurant.getTotalProfit()));
+				totalDistanceF.setText(Double.toString(restaurant.getTotalDeliveryDistance()));
 				
 				//Disable button
 				btnCalculateTotals.setEnabled(false);
@@ -341,28 +350,61 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				
 				//Activate other components
 				btnLoadOrderInfo.setEnabled(false);
+				pizzaLoaded = true;
 			}
 		});		
 		
 		btnLoadCustomerInfo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// Change values of fields to correct values
+				Customer currentCustomer = null;
+				int customerIndex;
 				
-				// Change the customer number selector to values
+				// Add every index to ComboBox
+				int numberCustomers = restaurant.getNumCustomerOrders();
+				lblCustomerTot.setText(Integer.toString(numberCustomers));
+				for(int i = 1; i <= numberCustomers; i++){
+					customerComboBox.addItem(i);
+				}
 				
-				//Change the total customers to values
-				// TODO
-				//If load correctly output:
-				txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
-				//If error output:
-				txtrWelcomeToPizza.setText("Error loading the customer info! :(");
-				
+				// Get the current selected customer
+				customerIndex = customerComboBox.getSelectedIndex();
+				try {
+					currentCustomer = restaurant.getCustomerByIndex(customerIndex);
+
+					// Change values of fields to correct values
+					txtCustomername.setText(currentCustomer.getName());
+					txtMobilenumber.setText(currentCustomer.getMobileNumber());
+					txtCustomertype.setText(currentCustomer.getCustomerType());
+					txtLocation.setText(Integer.toString(currentCustomer.getLocationX()) + ", " + Integer.toString(currentCustomer.getLocationY()));
+					txtDistance.setText(Double.toString(currentCustomer.getDeliveryDistance()));
+					//If load correctly output:
+					txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
+					
+				} catch (CustomerException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					//If error output:
+					txtrWelcomeToPizza.setText("Error loading the customer info! :(");
+				}					
+								
 				//Activate other components
 				btnLoadCustomerInfo.setEnabled(false);
 				customerComboBox.setEnabled(true);
 			}
-		});		
+		});
+		
+		customerComboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				// Update Customer Fields
+				updateCustomerField();
+				
+				// Update Order fields IF LOADED
+				if (pizzaLoaded){
+					updateOrderField();
+				}
+			}
+		});
 		
 		loadLogFileB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -416,6 +458,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				customerComboBox.setEnabled(false);
 				//Enable load log file
 				loadLogFileB.setEnabled(true);
+				
+				pizzaLoaded = false;
 			}
 		});
 		//--------------------------------------------------
@@ -448,6 +492,58 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			}
 		});
 	}*/
+	
+	// Method that updates Customer fields
+	private void updateCustomerField(){
+		
+		Customer currentCustomer = null;
+		int customerIndex;
+		// Get the current selected customer
+		customerIndex = customerComboBox.getSelectedIndex();
+		try {
+			currentCustomer = restaurant.getCustomerByIndex(customerIndex);
+			// Change values of fields to correct values
+			txtCustomername.setText(currentCustomer.getName());
+			txtMobilenumber.setText(currentCustomer.getMobileNumber());
+			txtCustomertype.setText(currentCustomer.getCustomerType());
+			txtLocation.setText(Integer.toString(currentCustomer.getLocationX()) + ", " + Integer.toString(currentCustomer.getLocationY()));
+			txtDistance.setText(Double.toString(currentCustomer.getDeliveryDistance()));
+			//If load correctly output:
+			txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
+			
+		} catch (CustomerException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			//If error output:
+			txtrWelcomeToPizza.setText("Error loading the customer info! :(");
+		}
+	}
+	
+	// Method that updates Order Fields
+	private void updateOrderField(){
+		Pizza currentPizza = null;
+		int pizzaIndex;
+		// Get the current selected customer
+		pizzaIndex = customerComboBox.getSelectedIndex();
+		
+		try {
+			currentPizza = restaurant.getPizzaByIndex(pizzaIndex);
+			// Change values of fields to correct values
+			txtType.setText(currentPizza.getPizzaType());
+			txtQuantity.setText(Integer.toString(currentPizza.getQuantity()));
+			txtPrice.setText(Double.toString(currentPizza.getOrderPrice()));
+			txtCost.setText(Double.toString(currentPizza.getOrderCost()));
+			txtProfit.setText(Double.toString(currentPizza.getOrderProfit()));
+			//If load correctly output:
+			txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
+			
+		} catch (PizzaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			//If error output:
+			txtrWelcomeToPizza.setText("Error loading the customer info! :(");
+		}
+	}
 	
 	
 	// Method that creates/opens file chooser
