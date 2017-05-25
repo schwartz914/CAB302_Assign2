@@ -52,7 +52,6 @@ public class LogHandler {
 			while((line = reader.readLine()) != null) {
 				customers.add(createCustomer(line));
 			}
-			
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,6 +83,7 @@ public class LogHandler {
 		    }
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);
+		    //throw new LogHandlerException("LogHandler Exception: Error trying to read file."); IDK HOW TO Throw LogHandler Exception
 		}
 		return pizzas;
 	}		

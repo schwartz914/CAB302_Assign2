@@ -59,7 +59,6 @@ public class LogHandlerPizzaTests {
 	@Test (expected = IOException.class)
 	public void noFileTest() throws PizzaException, LogHandlerException, CustomerException {
 		boolean result = pizzaPalace.processLog("FakeFile.txt");
-		assertTrue(result);
 	}
 	
 }
