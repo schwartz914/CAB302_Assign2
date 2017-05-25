@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -64,7 +65,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 */
 	public PizzaGUI(String title) {
 		// TO DO
-		
+		restaurant = new PizzaRestaurant();
 		//Create frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -86,7 +87,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		panel.setLayout(null);
 		
 		txtCustomername = new JTextField();
-		txtCustomername.setText("Name");
+		txtCustomername.setText("txtCustomername");
 		txtCustomername.setToolTipText("");
 		txtCustomername.setEditable(false);
 		txtCustomername.setColumns(10);
@@ -94,28 +95,28 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		panel.add(txtCustomername);
 		
 		txtMobilenumber = new JTextField();
-		txtMobilenumber.setText("Number");
+		txtMobilenumber.setText("txtMobilenumber");
 		txtMobilenumber.setEditable(false);
 		txtMobilenumber.setColumns(10);
 		txtMobilenumber.setBounds(134, 63, 86, 20);
 		panel.add(txtMobilenumber);
 		
 		txtCustomertype = new JTextField();
-		txtCustomertype.setText("CustomerType");
+		txtCustomertype.setText("txtCustomertype");
 		txtCustomertype.setEditable(false);
 		txtCustomertype.setColumns(10);
 		txtCustomertype.setBounds(134, 113, 86, 20);
 		panel.add(txtCustomertype);
 		
 		txtLocation = new JTextField();
-		txtLocation.setText("Location");
+		txtLocation.setText("txtLocation");
 		txtLocation.setEditable(false);
 		txtLocation.setColumns(10);
 		txtLocation.setBounds(134, 169, 86, 20);
 		panel.add(txtLocation);
 		
 		txtDistance = new JTextField();
-		txtDistance.setText("Distance");
+		txtDistance.setText("txtDistance");
 		txtDistance.setEditable(false);
 		txtDistance.setColumns(10);
 		txtDistance.setBounds(134, 221, 86, 20);
@@ -148,35 +149,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		contentPane.add(panel_1);
 		
 		txtType = new JTextField();
-		txtType.setText("Type");
+		txtType.setText("txtType");
 		txtType.setEditable(false);
 		txtType.setColumns(10);
 		txtType.setBounds(134, 11, 86, 20);
 		panel_1.add(txtType);
 		
 		txtQuantity = new JTextField();
-		txtQuantity.setText("Quantity");
+		txtQuantity.setText("txtQuantity");
 		txtQuantity.setEditable(false);
 		txtQuantity.setColumns(10);
 		txtQuantity.setBounds(134, 63, 86, 20);
 		panel_1.add(txtQuantity);
 		
 		txtPrice = new JTextField();
-		txtPrice.setText("Price");
+		txtPrice.setText("txtPrice");
 		txtPrice.setEditable(false);
 		txtPrice.setColumns(10);
 		txtPrice.setBounds(134, 113, 86, 20);
 		panel_1.add(txtPrice);
 		
 		txtCost = new JTextField();
-		txtCost.setText("Cost");
+		txtCost.setText("txtCost");
 		txtCost.setEditable(false);
 		txtCost.setColumns(10);
 		txtCost.setBounds(134, 169, 86, 20);
 		panel_1.add(txtCost);
 		
 		txtProfit = new JTextField();
-		txtProfit.setText("Profit");
+		txtProfit.setText("txtProfit");
 		txtProfit.setEditable(false);
 		txtProfit.setColumns(10);
 		txtProfit.setBounds(134, 221, 86, 20);
@@ -210,7 +211,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		orderHeadingL.setBounds(489, 107, 120, 14);
 		contentPane.add(orderHeadingL);
 		
-		JComboBox customerComboBox = new JComboBox();
+		JComboBox<String> customerComboBox = new JComboBox<String>();
 		customerComboBox.setEnabled(false);
 		customerComboBox.setBounds(297, 152, 100, 22);
 		contentPane.add(customerComboBox);
@@ -293,8 +294,18 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnLoadOrderInfo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int value = customerComboBox.getSelectedIndex();
 				// Change values of fields to correct values
-				
+				try {
+					txtType.setText(restaurant.getPizzaByIndex(value).getPizzaType());
+					txtQuantity.setText(Integer.toString(restaurant.getPizzaByIndex(value).getQuantity()));
+					txtPrice.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderPrice()));
+					txtCost.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderCost()));
+					txtProfit.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderProfit()));
+					
+				} catch(PizzaException pe) {
+					
+				}
 				// TODO
 				//If load correctly output:
 				txtrWelcomeToPizza.setText("Successfully loaded order info! :)");
@@ -302,7 +313,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				txtrWelcomeToPizza.setText("Error loading the order info! :(");
 				
 				//Activate other components
-				btnLoadOrderInfo.setEnabled(false);
+				
 			}
 		});
 		btnLoadOrderInfo.setEnabled(false);
@@ -316,7 +327,21 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnLoadCustomerInfo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+
+				int value = customerComboBox.getSelectedIndex();
+				//if(restaurant.getCustomerByIndex(value).getCustomerType() == )
 				// Change values of fields to correct values
+				
+				try {
+					txtCustomername.setText(restaurant.getCustomerByIndex(value).getName());
+					txtMobilenumber.setText(restaurant.getCustomerByIndex(value).getMobileNumber());
+					txtCustomertype.setText(restaurant.getCustomerByIndex(value).getCustomerType());
+					txtLocation.setText(restaurant.getCustomerByIndex(value).getLocationX() + ", " + restaurant.getCustomerByIndex(value).getLocationY());
+					txtDistance.setText(Double.toString(restaurant.getCustomerByIndex(value).getDeliveryDistance()));
+				} catch (CustomerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				// Change the customer number selector to values
 				
@@ -328,8 +353,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				txtrWelcomeToPizza.setText("Error loading the customer info! :(");
 				
 				//Activate other components
-				btnLoadCustomerInfo.setEnabled(false);
-				customerComboBox.setEnabled(true);
+				
 			}
 		});
 		
@@ -339,8 +363,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				
 				String filename = openFileChooser(arg0);
 				
-			// Run program on the file
-				// TODO
+			// Run program on the file if the user selects an option.
+				if(filename != null) {
 				try {
 					restaurant.processLog(filename);
 					//If load correctly output:
@@ -352,12 +376,25 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					e.printStackTrace();
 				}
 				
-			//Activate other components
-			loadLogFileB.setEnabled(false);
-			btnLoadCustomerInfo.setEnabled(true);
-			btnLoadOrderInfo.setEnabled(true);
-			btnReset.setEnabled(true);
-			btnCalculateTotals.setEnabled(true);
+				
+				for(int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+						try {
+							customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
+						} catch (CustomerException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				}
+				
+				//Activate other components
+				loadLogFileB.setEnabled(false);
+				btnLoadCustomerInfo.setEnabled(true);
+				btnLoadOrderInfo.setEnabled(true);
+				btnReset.setEnabled(true);
+				btnCalculateTotals.setEnabled(true);
+				customerComboBox.setEnabled(true);
+				
+				} //end if
 			}
 		});
 		loadLogFileB.setBounds(240, 33, 114, 23);
@@ -391,34 +428,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				loadLogFileB.setEnabled(true);
 			}
 		});
-		
-	}
-
-	public static void main(String[] args) {
-		try {
-			PizzaGUI frame = new PizzaGUI("Pizza Gui");
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		setVisible(true);
 	}
 	
 	
-	// DONT KNOW WHEN OR WHY SHOULD USE THIS/ INCORPERATE WITH MAIN
-	/*@Override
-	public void run() {
-		// TO DO
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PizzaGUI frame = new PizzaGUI("Pizza Gui");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 	
 	private String openFileChooser(ActionEvent arg0) {
 		final JFileChooser fc = new JFileChooser();
@@ -427,7 +440,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		if(returnVal==JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
 			filename = file.getAbsolutePath();
-		}else if(returnVal==JFileChooser.CANCEL_OPTION) {
+		}else  { //if(returnVal==JFileChooser.CANCEL_OPTION)
+			filename = null;
+			
 		}
 		
 		return filename;
