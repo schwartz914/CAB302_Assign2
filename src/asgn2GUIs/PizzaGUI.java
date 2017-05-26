@@ -86,7 +86,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		panel.setLayout(null);
 		
 		txtCustomername = new JTextField();
-		txtCustomername.setText("txtCustomername");
+		txtCustomername.setText("Customername");
 		txtCustomername.setToolTipText("");
 		txtCustomername.setEditable(false);
 		txtCustomername.setColumns(10);
@@ -94,28 +94,28 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		panel.add(txtCustomername);
 		
 		txtMobilenumber = new JTextField();
-		txtMobilenumber.setText("txtMobilenumber");
+		txtMobilenumber.setText("Mobilenumber");
 		txtMobilenumber.setEditable(false);
 		txtMobilenumber.setColumns(10);
 		txtMobilenumber.setBounds(134, 63, 86, 20);
 		panel.add(txtMobilenumber);
 		
 		txtCustomertype = new JTextField();
-		txtCustomertype.setText("txtCustomertype");
+		txtCustomertype.setText("Customertype");
 		txtCustomertype.setEditable(false);
 		txtCustomertype.setColumns(10);
 		txtCustomertype.setBounds(134, 113, 86, 20);
 		panel.add(txtCustomertype);
 		
 		txtLocation = new JTextField();
-		txtLocation.setText("txtLocation");
+		txtLocation.setText("Location");
 		txtLocation.setEditable(false);
 		txtLocation.setColumns(10);
 		txtLocation.setBounds(134, 169, 86, 20);
 		panel.add(txtLocation);
 		
 		txtDistance = new JTextField();
-		txtDistance.setText("txtDistance");
+		txtDistance.setText("Distance");
 		txtDistance.setEditable(false);
 		txtDistance.setColumns(10);
 		txtDistance.setBounds(134, 221, 86, 20);
@@ -148,35 +148,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		contentPane.add(panel_1);
 		
 		txtType = new JTextField();
-		txtType.setText("txtType");
+		txtType.setText("Type");
 		txtType.setEditable(false);
 		txtType.setColumns(10);
 		txtType.setBounds(134, 11, 86, 20);
 		panel_1.add(txtType);
 		
 		txtQuantity = new JTextField();
-		txtQuantity.setText("txtQuantity");
+		txtQuantity.setText("Quantity");
 		txtQuantity.setEditable(false);
 		txtQuantity.setColumns(10);
 		txtQuantity.setBounds(134, 63, 86, 20);
 		panel_1.add(txtQuantity);
 		
 		txtPrice = new JTextField();
-		txtPrice.setText("txtPrice");
+		txtPrice.setText("Price");
 		txtPrice.setEditable(false);
 		txtPrice.setColumns(10);
 		txtPrice.setBounds(134, 113, 86, 20);
 		panel_1.add(txtPrice);
 		
 		txtCost = new JTextField();
-		txtCost.setText("txtCost");
+		txtCost.setText("Cost");
 		txtCost.setEditable(false);
 		txtCost.setColumns(10);
 		txtCost.setBounds(134, 169, 86, 20);
 		panel_1.add(txtCost);
 		
 		txtProfit = new JTextField();
-		txtProfit.setText("txtProfit");
+		txtProfit.setText("Profit");
 		txtProfit.setEditable(false);
 		txtProfit.setColumns(10);
 		txtProfit.setBounds(134, 221, 86, 20);
@@ -260,7 +260,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnCalculateTotals.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Change fields to correct values
-				
+				totalProfitF.setText(Double.toString(restaurant.getTotalProfit()));
+				totalDistanceF.setText(Double.toString(restaurant.getTotalDeliveryDistance()));
 				//Disable button
 				btnCalculateTotals.setEnabled(false);
 			}
