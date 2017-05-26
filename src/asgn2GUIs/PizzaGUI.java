@@ -369,11 +369,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					restaurant.processLog(filename);
 					//If load correctly output:
 					txtrWelcomeToPizza.setText("Successfully loaded the log file! :)");
-				} catch (CustomerException | PizzaException | LogHandlerException e) {
+				} catch (CustomerException |  LogHandlerException e) {
 					// TODO Auto-generated catch block
 					//If error output:
 					txtrWelcomeToPizza.setText("Error loading the log file! :(");
 					e.printStackTrace();
+				} catch(PizzaException e) {
+					txtrWelcomeToPizza.setText(e.toString());
 				}
 				
 				
