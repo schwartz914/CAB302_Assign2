@@ -257,9 +257,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		panel_2.add(totalDistanceF);
 		
 		JButton btnCalculateTotals = new JButton("Calculate Totals");
-		btnCalculateTotals.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnCalculateTotals.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				//Change fields to correct values
 				
 				//Disable button
@@ -290,9 +289,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		contentPane.add(btnReset);
 		
 		JButton btnLoadOrderInfo = new JButton("Load Order Info");
-		btnLoadOrderInfo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnLoadOrderInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int value = customerComboBox.getSelectedIndex();
 				// Change values of fields to correct values
 				try {
@@ -323,9 +321,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnLoadCustomerInfo.setBounds(79, 398, 135, 23);
 		btnLoadCustomerInfo.setEnabled(false);
 		contentPane.add(btnLoadCustomerInfo);
-		btnLoadCustomerInfo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnLoadCustomerInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
 				int value = customerComboBox.getSelectedIndex();
 				//if(restaurant.getCustomerByIndex(value).getCustomerType() == )
@@ -430,18 +427,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			}
 		});
 		//--------------------------------------------------
-		
+		btnLoadOrderInfo.setEnabled(false);
+		btnCalculateTotals.setEnabled(false);
+		btnLoadCustomerInfo.setEnabled(false);
+		btnReset.setEnabled(false);
+		loadLogFileB.setEnabled(true);
+		setVisible(true);
 	}
 	
-	// Main Function, Creates the JFrame and GUI
-	public static void main(String[] args) {
-		try {
-			PizzaGUI frame = new PizzaGUI("Pizza Gui");
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	
 	// DONT KNOW WHEN OR WHY SHOULD USE THIS/ INCORPERATE WITH MAIN
@@ -463,13 +457,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	
 	// Method that creates/opens file chooser
 	private String openFileChooser(ActionEvent arg0) {
+		//String myPath = "..\\";
 		final JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(this);
 		String filename = "";
 		if(returnVal==JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
 			filename = file.getAbsolutePath();
-		}else if(returnVal==JFileChooser.CANCEL_OPTION) {
+		}else {
+			filename = null;
 		}
 		
 		return filename;		
