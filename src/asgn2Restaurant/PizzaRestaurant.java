@@ -36,6 +36,7 @@ public class PizzaRestaurant {
 	 * 
 	 */
 	public PizzaRestaurant() {
+		//pizzaRestaurant = new ArrayList<PizzaRestaurant>();
 		this.pizzas = new ArrayList<Pizza>();
 		this.customers = new ArrayList<Customer>();
 		
@@ -119,7 +120,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
-		return customers.size();
+		return 0;
 	}
 
 			
@@ -155,7 +156,7 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		customers.clear();
+		// TO DO
 		this.pizzas.clear();
 	}
 

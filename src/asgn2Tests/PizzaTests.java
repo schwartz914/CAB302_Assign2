@@ -89,7 +89,7 @@ public class PizzaTests {
 	
 	@Test
 	public void totalOrderCost() {
-		double expectedValue = 24.0;
+		double expectedValue = 10.0; // CHANGED THIS TO 10 from 24 as this is COST TO MAKE not PRICE; cost is $5 per ml Pizza * 2 = 10
 		double getValue = mlPizza2.getOrderCost();
 		assertEquals(expectedValue, getValue, 0);
 	}

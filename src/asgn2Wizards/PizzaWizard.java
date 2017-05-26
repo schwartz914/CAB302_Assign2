@@ -1,7 +1,6 @@
 package asgn2Wizards;
 
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import asgn2GUIs.PizzaGUI;
@@ -27,11 +26,7 @@ public class PizzaWizard {
 	 * @param args Command Line Arguments
 	 */
 	public static void main(String[] args) {
-		//JFrame.setDefaultLookAndFeelDecorated(true);
-		new PizzaGUI("Pizza Place");
-		//pizzaPlace.setVisible(true);
-		//SwingUtilities.invokeLater(new PizzaGUI("Pizza Place"));
-		//pizzaPlace.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		SwingUtilities.invokeLater(new PizzaGUI("Pizza Place"));		
 		
 	}
 

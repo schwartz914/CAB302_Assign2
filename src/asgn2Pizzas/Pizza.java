@@ -39,7 +39,7 @@ public abstract class Pizza  {
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
 		// TO DO
-		if(quantity > 0 && quantity < 10){
+		if(quantity > 0 && quantity <= 10){
 			this.quantity = quantity;
 		}else{
 			throw new PizzaException("Pizza Exception: Quantity of pizzas invalid; must order atleast 1 but no more than 10.");
@@ -106,7 +106,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
-		return this.cost * this.quantity;
+		return this.getCostPerPizza() * this.getQuantity();
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
-		return this.price * this.quantity;
+		return this.getPricePerPizza() * this.getQuantity();
 	}
 	
 	

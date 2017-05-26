@@ -44,7 +44,7 @@ public class LogHandler {
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
 		customers = new ArrayList<Customer>();
-		String path = filename;
+		String path = "logs\\" + filename;
 		try {
 		FileReader fr = new FileReader(path);
 		BufferedReader reader = new BufferedReader(fr);
@@ -52,7 +52,6 @@ public class LogHandler {
 			while((line = reader.readLine()) != null) {
 				customers.add(createCustomer(line));
 			}
-			
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -73,7 +72,7 @@ public class LogHandler {
 		// TO DO
 		pizzas = new ArrayList<Pizza>();
 		
-		String filePath = filename;
+		String filePath = "logs\\" + filename;
 		Path path = Paths.get(filePath);
 		Charset charset = Charset.forName("US-ASCII");
 		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
@@ -84,6 +83,7 @@ public class LogHandler {
 		    }
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);
+		    //throw new LogHandlerException("LogHandler Exception: Error trying to read file."); IDK HOW TO Throw LogHandler Exception
 		}
 		return pizzas;
 	}		
@@ -129,6 +129,24 @@ public class LogHandler {
 		LocalTime  orderTime = LocalTime.parse(lineArray[0]);
 		LocalTime deliveryTime = LocalTime.parse(lineArray[1]);
 		
+		/*String pizzaCode;
+		LocalTime orderTime, deliveryTime;
+		int quantity;
+		int numberCommas = 8;
+		int[] breakIndexes = new int[numberCommas];
+		int previousComma = 0;
+		for (int i = 0; i < breakIndexes.length; i++){
+			breakIndexes[i] = line.indexOf(",", previousComma + 1);
+			if(i != 0){
+				previousComma = breakIndexes[i-1];
+			}
+		}
+		
+		orderTime = LocalTime.parse(line.substring(0, breakIndexes[0] - 1));
+		deliveryTime = LocalTime.parse(line.substring(breakIndexes[0] + 1, breakIndexes[1] - 1));
+		pizzaCode = line.substring(breakIndexes[6] + 1, breakIndexes[7] - 1);
+		quantity = Integer.parseInt(line.substring(breakIndexes[7] + 1));		
+		*/
 		return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 	}
 
