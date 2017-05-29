@@ -57,7 +57,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField totalDistanceF;
 	private PizzaRestaurant restaurant;
 	private String filePathRemembered = null;
-	
+	private JTextArea txtrWelcomeToPizza;
+	private JButton btnLoadCustomerInfo;
+	private JButton btnLoadOrderInfo;
+	private JButton btnReset;
+	private JButton btnCalculateTotals;
+	private JButton loadLogFileB;
+	private JComboBox<String> customerComboBox;
 	
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -211,7 +217,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		orderHeadingL.setBounds(489, 107, 120, 14);
 		contentPane.add(orderHeadingL);
 		
-		JComboBox<String> customerComboBox = new JComboBox<String>();
+		customerComboBox = new JComboBox<String>();
 		customerComboBox.setEnabled(false);
 		customerComboBox.setBounds(297, 152, 100, 22);
 		contentPane.add(customerComboBox);
@@ -257,7 +263,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		totalDistanceF.setBounds(151, 38, 86, 20);
 		panel_2.add(totalDistanceF);
 		
-		JButton btnCalculateTotals = new JButton("Calculate Totals");
+		btnCalculateTotals = new JButton("Calculate Totals");
 		btnCalculateTotals.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Change fields to correct values
@@ -275,8 +281,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		lblOrderCalculations.setBounds(99, 431, 140, 14);
 		contentPane.add(lblOrderCalculations);
 		
-		JTextArea txtrWelcomeToPizza = new JTextArea();
+		txtrWelcomeToPizza = new JTextArea();
 		txtrWelcomeToPizza.setEditable(false);
+		txtrWelcomeToPizza.setLineWrap(true);
 		txtrWelcomeToPizza.setText("Welcome to Pizza GUI");
 		txtrWelcomeToPizza.setBounds(403, 462, 258, 90);
 		contentPane.add(txtrWelcomeToPizza);
@@ -285,12 +292,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		lblTaskReport.setBounds(511, 437, 90, 14);
 		contentPane.add(lblTaskReport);
 		
-		JButton btnReset = new JButton("Reset");
+		btnReset = new JButton("Reset");
 		btnReset.setEnabled(false);
 		btnReset.setBounds(364, 33, 70, 23);
 		contentPane.add(btnReset);
 		
-		JButton btnLoadOrderInfo = new JButton("Load Order Info");
+		btnLoadOrderInfo = new JButton("Load Order Info");
 		btnLoadOrderInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int value = customerComboBox.getSelectedIndex();
@@ -319,7 +326,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnLoadOrderInfo.setBounds(478, 392, 114, 23);
 		contentPane.add(btnLoadOrderInfo);
 		
-		JButton btnLoadCustomerInfo = new JButton("Load Customer Info");
+		btnLoadCustomerInfo = new JButton("Load Customer Info");
 		btnLoadCustomerInfo.setBounds(79, 398, 135, 23);
 		btnLoadCustomerInfo.setEnabled(false);
 		contentPane.add(btnLoadCustomerInfo);
@@ -336,8 +343,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					txtCustomertype.setText(restaurant.getCustomerByIndex(value).getCustomerType());
 					txtLocation.setText(restaurant.getCustomerByIndex(value).getLocationX() + ", " + restaurant.getCustomerByIndex(value).getLocationY());
 					txtDistance.setText(Double.toString(restaurant.getCustomerByIndex(value).getDeliveryDistance()));
+					txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
 				} catch (CustomerException e) {
 					// TODO Auto-generated catch block
+					txtrWelcomeToPizza.setText("Error loading the customer info! :(");
 					e.printStackTrace();
 				}
 				
@@ -346,16 +355,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				//Change the total customers to values
 				// TODO
 				//If load correctly output:
-				txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
+				
 				//If error output:
-				txtrWelcomeToPizza.setText("Error loading the customer info! :(");
+				
 				
 				//Activate other components
 				
 			}
 		});
 		
-		JButton loadLogFileB = new JButton("Load Log File");
+		loadLogFileB = new JButton("Load Log File");
 		loadLogFileB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -369,12 +378,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					txtrWelcomeToPizza.setText("Successfully loaded the log file! :)");
 					label.setText(Integer.toString(restaurant.getNumCustomerOrders()));
 				} catch (CustomerException |  LogHandlerException e) {
-					// TODO Auto-generated catch block
-					//If error output:
-					txtrWelcomeToPizza.setText("Error loading the log file! :(");
-					e.printStackTrace();
+					txtrWelcomeToPizza.setText(e.getMessage());
 				} catch(PizzaException e) {
-					txtrWelcomeToPizza.setText(e.toString());
+					txtrWelcomeToPizza.setText(e.getMessage());
 				}
 				
 				
@@ -383,7 +389,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 							customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
 						} catch (CustomerException e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							txtrWelcomeToPizza.setText(e.getMessage());
 						}
 				}
 				
@@ -402,33 +408,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		contentPane.add(loadLogFileB);
 		
 		//Mouse Listeners
-		btnReset.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//Reset all the values to original
-				txtCustomername.setText("Name");
-				txtMobilenumber.setText("Number");
-				txtCustomertype.setText("Type");
-				txtDistance.setText("Distance");
-				txtLocation.setText("Location");
+		btnReset.addActionListener(this);
+				/*new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				
-				txtType.setText("Type");
-				txtQuantity.setText("Quantity");
-				txtPrice.setText("Price");
-				txtCost.setText("Cost");
-				txtProfit.setText("Proft");
-				txtrWelcomeToPizza.setText("Welcome to Pizza GUI");
 				
-				//Disable all the buttons
-				btnLoadCustomerInfo.setEnabled(false);
-				btnLoadOrderInfo.setEnabled(false);
-				btnReset.setEnabled(false);
-				btnCalculateTotals.setEnabled(false);
-				customerComboBox.setEnabled(false);
-				//Enable load log file
-				loadLogFileB.setEnabled(true);
 			}
-		});
+		});*/
+		
 		//--------------------------------------------------
 		btnLoadOrderInfo.setEnabled(false);
 		btnCalculateTotals.setEnabled(false);
@@ -477,8 +464,36 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+		if(command == "Reset") {
+			resetGUI();
+		}
+	}
+	
+	private void resetGUI() {
+		//Reset all the values to original
+		txtCustomername.setText("Name");
+		txtMobilenumber.setText("Number");
+		txtCustomertype.setText("Type");
+		txtDistance.setText("Distance");
+		txtLocation.setText("Location");
+		
+		txtType.setText("Type");
+		txtQuantity.setText("Quantity");
+		txtPrice.setText("Price");
+		txtCost.setText("Cost");
+		txtProfit.setText("Proft");
+		txtrWelcomeToPizza.setText("Welcome to Pizza GUI");
+		
+		//Disable all the buttons
+		btnLoadCustomerInfo.setEnabled(false);
+		btnLoadOrderInfo.setEnabled(false);
+		btnReset.setEnabled(false);
+		btnCalculateTotals.setEnabled(false);
+		customerComboBox.setEnabled(false);
+		//Enable load log file
+		loadLogFileB.setEnabled(true);
 	}
 
 	@Override
