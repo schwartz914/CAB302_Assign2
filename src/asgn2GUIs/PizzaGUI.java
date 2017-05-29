@@ -56,6 +56,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField totalProfitF;
 	private JTextField totalDistanceF;
 	private PizzaRestaurant restaurant;
+	private String filePathRemembered = null;
 	
 	
 	/**
@@ -460,7 +461,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	// Method that creates/opens file chooser
 	private String openFileChooser(ActionEvent arg0) {
 		//String myPath = "..\\";
-		final JFileChooser fc = new JFileChooser();
+		final JFileChooser fc = new JFileChooser(filePathRemembered);
 		int returnVal = fc.showOpenDialog(this);
 		String filename = "";
 		if(returnVal==JFileChooser.APPROVE_OPTION) {
@@ -470,6 +471,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			filename = null;
 		}
 		
+		filePathRemembered = filename;
 		return filename;		
 	}
 
