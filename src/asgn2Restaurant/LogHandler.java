@@ -53,10 +53,13 @@ public class LogHandler {
 				customers.add(createCustomer(line));
 			}
 			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.format("IOException: %s%n", e);
-		} //Must setup to throw LogHandler exception.
+		} catch (CustomerException e) {
+			throw new CustomerException(e.getMessage());
+			
+		} catch(LogHandlerException | IOException e) {
+			throw new LogHandlerException(e.getMessage());
+		}
+		
 		return customers;
 	}		
 
@@ -107,9 +110,12 @@ public class LogHandler {
 		String mobileNumber = lineArray[3];
 		int locX = Integer.parseInt(lineArray[5]);
 		int locY = Integer.parseInt(lineArray[6]);
-
-		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
 		
+		try{
+		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
+		} catch(CustomerException e) {
+			throw new CustomerException(e);
+		}
 		
 	}
 	

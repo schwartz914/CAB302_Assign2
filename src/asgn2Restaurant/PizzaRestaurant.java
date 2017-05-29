@@ -62,12 +62,11 @@ public class PizzaRestaurant {
 			customers = LogHandler.populateCustomerDataset(filename);
 			pizzas = LogHandler.populatePizzaDataset(filename);
 			return true;
-		}catch(LogHandlerException exception){
-			
-			System.err.println(exception.getMessage());
-			
-			return false;
-		} //Do We need to add multiple catch statements for Pizza and customer exceptions
+		}catch(LogHandlerException e){
+			throw new LogHandlerException(e.getMessage());
+		} catch(CustomerException e) {
+			throw new CustomerException(e.getMessage());
+		}
 		
 	}
 
@@ -79,7 +78,7 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		if(index < 0 || index > this.customers.size()) {
-			throw new CustomerException("Customer Exception: The index is invalid.");
+			throw new CustomerException(" The index is invalid.");
 		} else {
 			return this.customers.get(index);
 		}
