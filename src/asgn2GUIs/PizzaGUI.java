@@ -264,12 +264,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		totalProfitF = new JTextField();
 		totalProfitF.setEditable(false);
 		totalProfitF.setColumns(10);
+		totalProfitF.setText("0");
 		totalProfitF.setBounds(151, 11, 86, 20);
 		panel_2.add(totalProfitF);
 		
 		totalDistanceF = new JTextField();
 		totalDistanceF.setEditable(false);
 		totalDistanceF.setColumns(10);
+		totalDistanceF.setText("0");
 		totalDistanceF.setBounds(151, 38, 86, 20);
 		panel_2.add(totalDistanceF);
 		//--------------------------------------------------
@@ -377,15 +379,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		} catch(PizzaException e) {
 			txtrWelcomeToPizza.setText(e.getMessage());
 		}
-		
-		
+				
 		for(int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
-				try {
-					customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
-				} catch (CustomerException e) {
-					// TODO Auto-generated catch block
-					txtrWelcomeToPizza.setText(e.getMessage());
-				}
+			try {
+				customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
+			} catch (CustomerException e) {
+				// TODO Auto-generated catch block
+				txtrWelcomeToPizza.setText(e.getMessage());
+			}
 		}
 		
 		//Activate other components
@@ -429,15 +430,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtPrice.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderPrice()));
 			txtCost.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderCost()));
 			txtProfit.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderProfit()));
-			
+			txtrWelcomeToPizza.setText("Successfully loaded order info! :)");
 		} catch(PizzaException e) {
-			txtrWelcomeToPizza.setText(e.getMessage());	
-		}
-		
-		txtrWelcomeToPizza.setText("Successfully loaded order info! :)");
-		
-		txtrWelcomeToPizza.setText("Error loading the order info! :(");
-		
+			txtrWelcomeToPizza.setText(e.getMessage());
+			txtrWelcomeToPizza.setText("Error loading the order info! :(");
+		}		
 	}
 	
 	private void calculateTotalsButton() {
@@ -462,6 +459,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		txtCost.setText("Cost");
 		txtProfit.setText("Proft");
 		txtrWelcomeToPizza.setText("Welcome to Pizza GUI");
+		
+		totalProfitF.setText("0");
+		totalDistanceF.setText("0");
 		
 		//Disable all the buttons
 		btnLoadCustomerInfo.setEnabled(false);

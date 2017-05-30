@@ -117,7 +117,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
-		return customers.size();
+		return this.customers.size();
 	}
 
 			
@@ -128,11 +128,11 @@ public class PizzaRestaurant {
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
 	public double getTotalDeliveryDistance(){
-			double distance = 0;
-			for(Customer customer : customers){
-				distance += customer.getDeliveryDistance();
-			}
-			return distance;
+		double distance = 0;
+		for(Customer customer : this.customers){
+			distance += customer.getDeliveryDistance();
+		}
+		return distance;
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		customers.clear();
+		this.customers.clear();
 		this.pizzas.clear();
 	}
 
