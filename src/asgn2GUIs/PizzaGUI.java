@@ -439,8 +439,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	
 	private void calculateTotalsButton() {
 			//Change fields to correct values
-			totalProfitF.setText(Double.toString(restaurant.getTotalProfit()));
-			totalDistanceF.setText(Double.toString(restaurant.getTotalDeliveryDistance()));
+			totalProfitF.setText(Double.toString(Math.round(restaurant.getTotalProfit())));
+			totalDistanceF.setText(Double.toString(Math.round(restaurant.getTotalDeliveryDistance())));
 			//Disable button
 			//btnCalculateTotals.setEnabled(false);
 		}
