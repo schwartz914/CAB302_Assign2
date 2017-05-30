@@ -73,7 +73,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	public PizzaGUI(String title) {
 		// TO DO
 		restaurant = new PizzaRestaurant();
-		//Create frame
+		
+		// ---- Create the Frame and main JPanel ----
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 699, 601);
@@ -81,18 +82,114 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//--------------------------------------------------
 		
-		Label Heading = new Label("WELCOME TO PIZZA GUI");
-		Heading.setAlignment(Label.CENTER);
-		Heading.setBounds(265, 10, 140, 22);
-		contentPane.add(Heading);
-		
+		// ---- Create JPanel's ----
 		JPanel panel = new JPanel();
 		panel.setBounds(24, 127, 258, 260);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBounds(403, 127, 258, 260);
+		contentPane.add(panel_1);		
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(24, 450, 252, 69);
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);		
+		//--------------------------------------------------
+		
+		// ---- Create Label's/JLabel's ----		
+		Label Heading = new Label("WELCOME TO PIZZA GUI");
+		Heading.setAlignment(Label.CENTER);
+		Heading.setBounds(265, 10, 140, 22);
+		contentPane.add(Heading);
+		
+		JLabel customerNameL = new JLabel("Customer Name:");
+		customerNameL.setBounds(40, 14, 100, 14);
+		panel.add(customerNameL);
+		
+		JLabel mobileNumberL = new JLabel("Mobile Number:");
+		mobileNumberL.setBounds(40, 66, 90, 14);
+		panel.add(mobileNumberL);
+		
+		JLabel CustomerTypeL = new JLabel("Customer Type:");
+		CustomerTypeL.setBounds(40, 116, 90, 14);
+		panel.add(CustomerTypeL);
+		
+		JLabel xyLocL = new JLabel("X and Y Location:");
+		xyLocL.setBounds(20, 172, 150, 14);
+		panel.add(xyLocL);
+		
+		JLabel distRestL = new JLabel("Distance (restaurant):");
+		distRestL.setBounds(10, 216, 150, 30);
+		panel.add(distRestL);				
+		
+		JLabel pizzaTypeL = new JLabel("Pizza Type:");
+		pizzaTypeL.setBounds(56, 15, 80, 14);
+		panel_1.add(pizzaTypeL);
+		
+		JLabel Quantity = new JLabel("Quantity:");
+		Quantity.setBounds(65, 67, 80, 14);
+		panel_1.add(Quantity);
+		
+		JLabel lblOrderPrice = new JLabel("Order Price:");
+		lblOrderPrice.setBounds(55, 117, 80, 14);
+		panel_1.add(lblOrderPrice);
+		
+		JLabel lblOrdercost = new JLabel("OrderCost:");
+		lblOrdercost.setBounds(59, 172, 80, 14);
+		panel_1.add(lblOrdercost);
+		
+		JLabel lblOrderProfit = new JLabel("Order Profit:");
+		lblOrderProfit.setBounds(52, 220, 80, 23);
+		panel_1.add(lblOrderProfit);
+		
+		JLabel customerHeadingL = new JLabel("Customer Information");
+		customerHeadingL.setBounds(99, 107, 130, 14);
+		contentPane.add(customerHeadingL);
+		
+		JLabel orderHeadingL = new JLabel("Order Information");
+		orderHeadingL.setBounds(489, 107, 120, 14);
+		contentPane.add(orderHeadingL);
+		
+		JLabel lblCustomerNumber = new JLabel("Select Customer:");
+		lblCustomerNumber.setBounds(299, 127, 100, 14);
+		contentPane.add(lblCustomerNumber);
+		
+		JLabel lblTotalCustomers = new JLabel("Total Customers:");
+		lblTotalCustomers.setBounds(299, 197, 120, 14);
+		contentPane.add(lblTotalCustomers);
+		
+		JLabel lblTotalProfit = new JLabel("Total Profit:");
+		lblTotalProfit.setBounds(10, 14, 84, 14);
+		panel_2.add(lblTotalProfit);
+		
+		JLabel lblTotalDistance = new JLabel("Total Distance Travelled:");
+		lblTotalDistance.setBounds(10, 41, 125, 14);
+		panel_2.add(lblTotalDistance);
+		
+		numCustomers = new JLabel("0");
+		numCustomers.setEnabled(false);
+		numCustomers.setHorizontalAlignment(SwingConstants.CENTER);
+		numCustomers.setBounds(324, 222, 46, 14);
+		contentPane.add(numCustomers);
+		
+		JLabel lblOrderCalculations = new JLabel("Order Calculations");
+		lblOrderCalculations.setBounds(99, 431, 140, 14);
+		contentPane.add(lblOrderCalculations);
+		
+		JLabel lblTaskReport = new JLabel("Task Report");
+		lblTaskReport.setBounds(511, 437, 90, 14);
+		contentPane.add(lblTaskReport);
+		//--------------------------------------------------
+		
+		// ---- Create JTextField's ----
 		txtCustomername = new JTextField();
 		txtCustomername.setText("Customername");
 		txtCustomername.setToolTipText("");
@@ -129,32 +226,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		txtDistance.setBounds(134, 221, 86, 20);
 		panel.add(txtDistance);
 		
-		JLabel customerNameL = new JLabel("Customer Name:");
-		customerNameL.setBounds(40, 14, 100, 14);
-		panel.add(customerNameL);
-		
-		JLabel mobileNumberL = new JLabel("Mobile Number:");
-		mobileNumberL.setBounds(40, 66, 90, 14);
-		panel.add(mobileNumberL);
-		
-		JLabel CustomerTypeL = new JLabel("Customer Type:");
-		CustomerTypeL.setBounds(40, 116, 90, 14);
-		panel.add(CustomerTypeL);
-		
-		JLabel xyLocL = new JLabel("X and Y Location:");
-		xyLocL.setBounds(20, 172, 150, 14);
-		panel.add(xyLocL);
-		
-		JLabel distRestL = new JLabel("Distance (restaurant):");
-		distRestL.setBounds(10, 216, 150, 30);
-		panel.add(distRestL);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(403, 127, 258, 260);
-		contentPane.add(panel_1);
-		
 		txtType = new JTextField();
 		txtType.setText("Type");
 		txtType.setEditable(false);
@@ -190,102 +261,44 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		txtProfit.setBounds(134, 221, 86, 20);
 		panel_1.add(txtProfit);
 		
-		JLabel pizzaTypeL = new JLabel("Pizza Type:");
-		pizzaTypeL.setBounds(56, 15, 80, 14);
-		panel_1.add(pizzaTypeL);
-		
-		JLabel Quantity = new JLabel("Quantity:");
-		Quantity.setBounds(65, 67, 80, 14);
-		panel_1.add(Quantity);
-		
-		JLabel lblOrderPrice = new JLabel("Order Price:");
-		lblOrderPrice.setBounds(55, 117, 80, 14);
-		panel_1.add(lblOrderPrice);
-		
-		JLabel lblOrdercost = new JLabel("OrderCost:");
-		lblOrdercost.setBounds(59, 172, 80, 14);
-		panel_1.add(lblOrdercost);
-		
-		JLabel lblOrderProfit = new JLabel("Order Profit:");
-		lblOrderProfit.setBounds(52, 220, 80, 23);
-		panel_1.add(lblOrderProfit);
-		
-		JLabel customerHeadingL = new JLabel("Customer Information");
-		customerHeadingL.setBounds(99, 107, 130, 14);
-		contentPane.add(customerHeadingL);
-		
-		JLabel orderHeadingL = new JLabel("Order Information");
-		orderHeadingL.setBounds(489, 107, 120, 14);
-		contentPane.add(orderHeadingL);
-		
-		customerComboBox = new JComboBox<String>();
-		customerComboBox.setEnabled(false);
-		customerComboBox.setBounds(297, 152, 100, 22);
-		contentPane.add(customerComboBox);
-		
-		JLabel lblCustomerNumber = new JLabel("Select Customer:");
-		lblCustomerNumber.setBounds(299, 127, 100, 14);
-		contentPane.add(lblCustomerNumber);
-		
-		JLabel lblTotalCustomers = new JLabel("Total Customers:");
-		lblTotalCustomers.setBounds(299, 197, 120, 14);
-		contentPane.add(lblTotalCustomers);
-		
-		numCustomers = new JLabel("0");
-		numCustomers.setEnabled(false);
-		numCustomers.setHorizontalAlignment(SwingConstants.CENTER);
-		numCustomers.setBounds(324, 222, 46, 14);
-		contentPane.add(numCustomers);
-		
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(24, 450, 252, 69);
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane.add(panel_2);
-		panel_2.setLayout(null);
-		
-		JLabel lblTotalProfit = new JLabel("Total Profit:");
-		lblTotalProfit.setBounds(10, 14, 84, 14);
-		panel_2.add(lblTotalProfit);
-		
 		totalProfitF = new JTextField();
 		totalProfitF.setEditable(false);
 		totalProfitF.setColumns(10);
 		totalProfitF.setBounds(151, 11, 86, 20);
 		panel_2.add(totalProfitF);
 		
-		JLabel lblTotalDistance = new JLabel("Total Distance Travelled:");
-		lblTotalDistance.setBounds(10, 41, 125, 14);
-		panel_2.add(lblTotalDistance);
-		
 		totalDistanceF = new JTextField();
 		totalDistanceF.setEditable(false);
 		totalDistanceF.setColumns(10);
 		totalDistanceF.setBounds(151, 38, 86, 20);
 		panel_2.add(totalDistanceF);
+		//--------------------------------------------------
 		
-		btnCalculateTotals = new JButton("Calculate Totals");
-		btnCalculateTotals.addActionListener(this);
-		btnCalculateTotals.setEnabled(false);
-		btnCalculateTotals.setBounds(79, 530, 135, 23);
-		contentPane.add(btnCalculateTotals);
+		// ---- Create JComboBox ----
+		customerComboBox = new JComboBox<String>();
+		customerComboBox.setEnabled(false);
+		customerComboBox.setBounds(297, 152, 100, 22);
+		contentPane.add(customerComboBox);
+		//--------------------------------------------------
 		
-		JLabel lblOrderCalculations = new JLabel("Order Calculations");
-		lblOrderCalculations.setBounds(99, 431, 140, 14);
-		contentPane.add(lblOrderCalculations);
-		
+		// ---- Create JTextArea ----
 		txtrWelcomeToPizza = new JTextArea();
 		txtrWelcomeToPizza.setEditable(false);
 		txtrWelcomeToPizza.setLineWrap(true);
 		txtrWelcomeToPizza.setText("Welcome to Pizza GUI");
 		txtrWelcomeToPizza.setBounds(403, 462, 258, 90);
 		contentPane.add(txtrWelcomeToPizza);
+		//--------------------------------------------------
 		
-		JLabel lblTaskReport = new JLabel("Task Report");
-		lblTaskReport.setBounds(511, 437, 90, 14);
-		contentPane.add(lblTaskReport);
+		// ---- Create JButton's ----
+		btnCalculateTotals = new JButton("Calculate Totals");
+		btnCalculateTotals.addActionListener(this);
+		btnCalculateTotals.setEnabled(false);
+		btnCalculateTotals.setBounds(79, 530, 135, 23);
+		contentPane.add(btnCalculateTotals);
 		
 		btnReset = new JButton("Reset");
+		btnReset.addActionListener(this);
 		btnReset.setEnabled(false);
 		btnReset.setBounds(364, 33, 70, 23);
 		contentPane.add(btnReset);
@@ -304,41 +317,16 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		loadLogFileB = new JButton("Load Log File");
 		loadLogFileB.addActionListener(this);
+		loadLogFileB.setEnabled(true);
 		loadLogFileB.setBounds(240, 33, 114, 23);
 		contentPane.add(loadLogFileB);
-		
-		//Mouse Listeners
-		btnReset.addActionListener(this);
+		//--------------------------------------------------	
 				
 		
-		//--------------------------------------------------
-		btnLoadOrderInfo.setEnabled(false);
-		btnCalculateTotals.setEnabled(false);
-		btnLoadCustomerInfo.setEnabled(false);
-		btnReset.setEnabled(false);
-		loadLogFileB.setEnabled(true);
+		// ---- Make the GUI Visible ----
 		setVisible(true);
-	}
-	
-	
-	
-	
-	// DONT KNOW WHEN OR WHY SHOULD USE THIS/ INCORPERATE WITH MAIN
-	/*@Override
-	public void run() {
-		// TO DO
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PizzaGUI frame = new PizzaGUI("Pizza Gui");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-	
+		//--------------------------------------------------
+	}	
 	
 	// Method that creates/opens file chooser
 	private String openFileChooser(ActionEvent arg0) {
