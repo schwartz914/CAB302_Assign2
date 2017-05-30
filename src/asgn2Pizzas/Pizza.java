@@ -87,7 +87,7 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
-		this.calculateCostPerPizza(); //MIGHT NOT NEED THIS LINE
+		this.calculateCostPerPizza();
 		return this.cost;
 	}
 

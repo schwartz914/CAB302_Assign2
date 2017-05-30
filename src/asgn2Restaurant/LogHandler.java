@@ -81,12 +81,14 @@ public class LogHandler {
 		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 		    String line = null;
 		    while ((line = reader.readLine()) != null) {
-		    	pizzas.add(LogHandler.createPizza(line));
-		       // System.out.println(line);
+		    	pizzas.add(LogHandler.createPizza(line));		       
 		    }
-		} catch (IOException x) {
-		    System.err.format("IOException: %s%n", x);
-		    //throw new LogHandlerException("LogHandler Exception: Error trying to read file."); IDK HOW TO Throw LogHandler Exception
+		    reader.close();
+		} catch (PizzaException e) {
+			throw new PizzaException(e.getMessage());
+			
+		} catch(LogHandlerException | IOException e) {
+			throw new LogHandlerException(e.getMessage());
 		}
 		return pizzas;
 	}		
@@ -135,25 +137,11 @@ public class LogHandler {
 		LocalTime  orderTime = LocalTime.parse(lineArray[0]);
 		LocalTime deliveryTime = LocalTime.parse(lineArray[1]);
 		
-		/*String pizzaCode;
-		LocalTime orderTime, deliveryTime;
-		int quantity;
-		int numberCommas = 8;
-		int[] breakIndexes = new int[numberCommas];
-		int previousComma = 0;
-		for (int i = 0; i < breakIndexes.length; i++){
-			breakIndexes[i] = line.indexOf(",", previousComma + 1);
-			if(i != 0){
-				previousComma = breakIndexes[i-1];
-			}
+		try{
+			return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
+		} catch(PizzaException e) {
+			throw new PizzaException(e);
 		}
-		
-		orderTime = LocalTime.parse(line.substring(0, breakIndexes[0] - 1));
-		deliveryTime = LocalTime.parse(line.substring(breakIndexes[0] + 1, breakIndexes[1] - 1));
-		pizzaCode = line.substring(breakIndexes[6] + 1, breakIndexes[7] - 1);
-		quantity = Integer.parseInt(line.substring(breakIndexes[7] + 1));		
-		*/
-		return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 	}
 
 }

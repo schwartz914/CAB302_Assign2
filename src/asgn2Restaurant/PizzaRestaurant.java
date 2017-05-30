@@ -66,8 +66,7 @@ public class PizzaRestaurant {
 			throw new LogHandlerException(e.getMessage());
 		} catch(CustomerException e) {
 			throw new CustomerException(e.getMessage());
-		}
-		
+		}		
 	}
 
 	/**
@@ -78,7 +77,7 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		if(index < 0 || index > this.customers.size()) {
-			throw new CustomerException(" The index is invalid.");
+			throw new CustomerException("CustomerException: The index is invalid.");
 		} else {
 			return this.customers.get(index);
 		}
