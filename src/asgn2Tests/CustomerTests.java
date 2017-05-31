@@ -3,6 +3,8 @@ package asgn2Tests;
 import org.junit.Before;
 import org.junit.Test;
 
+import asgn2Customers.Customer;
+import asgn2Customers.CustomerFactory;
 import asgn2Customers.DriverDeliveryCustomer;
 import asgn2Customers.DroneDeliveryCustomer;
 import asgn2Customers.PickUpCustomer;
@@ -31,13 +33,13 @@ public class CustomerTests {
 	
 	// Customer.java Tests (Using DriverDeliveryCustomer)
 		// --- Customer() Tests	---
-		// Test name, mobile number, locationx, locationy & type is assigned correctly
 		
 		// Test CustomerException thrown if one of above not correct
 		// Type isn't “Pick Up”, “Driver Delivery” or “Drone Delivery”
 		@Test(expected = CustomerException.class)
 		public void incorrectType() throws CustomerException {
-			assertEquals(dlCustomer.getCustomerType(), "Driver Delivery"); // NOT SURE HOW TO TEST THIS
+			//Customer testCustomer = new Customer();
+			assertEquals(dlCustomer.getCustomerType(), "DriverDelivery"); // NOT SURE HOW TO TEST THIS
 		}
 		// Customer name between 1 & 20
 		@Test(expected = CustomerException.class)
@@ -48,7 +50,7 @@ public class CustomerTests {
 		public void nameMin() throws CustomerException {
 			DriverDeliveryCustomer dlCustomer3 = new DriverDeliveryCustomer("", "04123456789", 4, 5);
 		}
-		// Customer name white spcaces
+		// Customer name white spaces
 		@Test(expected = CustomerException.class)
 		public void nameWhiteSpaces() throws CustomerException {
 			DriverDeliveryCustomer dlCustomer3 = new DriverDeliveryCustomer("       ", "0412345678", 4, 5);
@@ -64,11 +66,7 @@ public class CustomerTests {
 		public void mobileNumberStartZero() throws CustomerException {
 			DriverDeliveryCustomer dlCustomer3 = new DriverDeliveryCustomer("Jim", "6412345678", 4, 5);
 		}
-		// Correct x location (east,west)
-		// Correct y location (north, south)
-		
-		// Deliver over 10 if distance > 10
-		
+				
 		// --- getName() Tests ---	
 		// Test correct name returned
 		@Test
@@ -116,9 +114,6 @@ public class CustomerTests {
 	
 	// PickUpCustomer.java
 		// --- PickUpDeliveryCustomer() Tests ---
-		// Test name, mobilenumber, locationx & locationy are correct
-		// Throws CustomerException if parameters are invalid 
-		// Location 0,0 if pickup
 		@Test(expected = CustomerException.class)
 		public void locationPickupZeroZero() throws CustomerException {
 			PickUpCustomer puCustomer = new PickUpCustomer("Josh", "0412345678", 4, 5);
@@ -131,11 +126,6 @@ public class CustomerTests {
 		}
 	
 	// DriverDeliveryCustomer.java
-		// --- DriverDeliveryCustomer() Tests ---
-		// Test name, mobilenumber, locationx & locationy are correct
-		// Throws CustomerException if parameters are invalid
-			//Previously Tested in Customer.java Tests
-		// Not deliver if more 10 blocks in any direction
 		@Test(expected = CustomerException.class)
 		public void deliveryGreaterTen() throws CustomerException {
 			DriverDeliveryCustomer dlCustomer3 = new DriverDeliveryCustomer("Jim", "0412345678", 11, 2);
@@ -148,21 +138,15 @@ public class CustomerTests {
 			assertEquals(dlCustomer3.getLocationX(), 10);
 			assertEquals(dlCustomer4.getLocationY(), 10);
 		}
-		// --- getDeliveryDistance() Tests ---
-		// Test returns correct value
-		// Tests manhattan distance calculator used (correctly)
-			//Previously Tested in Customer.java Tests
 	
 	// DroneDeliveryCustomer.java
 		// --- DroneDeliveryCustomer() Tests ---
-		// Test name, mobilenumber, locationx & locationy are correct
 		// Throws CustomerException if parameters are invalid 
 		@Test(expected = CustomerException.class)
 		public void locationPickupZeroZeroDD() throws CustomerException {
 			DroneDeliveryCustomer ddCustomer = new DroneDeliveryCustomer("Josh", "0412345678", 0, 0);
 		}
 		// --- getDeliveryDistance() Tests ---
-		// Test returns correct value
 		// Tests Euclidean distance calculator used (correctly)
 		@Test
 		public void deliveryDistanceCorrectDD() throws CustomerException {
