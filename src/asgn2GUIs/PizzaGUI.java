@@ -20,8 +20,7 @@ import asgn2Restaurant.PizzaRestaurant;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 
 /**
@@ -56,7 +55,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField totalProfitF;
 	private JTextField totalDistanceF;
 	private PizzaRestaurant restaurant;
-	private String filePathRemembered = null;
 	private JTextArea txtrWelcomeToPizza;
 	private JButton btnLoadCustomerInfo;
 	private JButton btnLoadOrderInfo;
@@ -332,8 +330,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	
 	// Method that creates/opens file chooser
 	private String openFileChooser(ActionEvent arg0) {
-		//String myPath = "..\\";
-		final JFileChooser fc = new JFileChooser(filePathRemembered);
+		String myPath = ".\\logs\\";
+		final JFileChooser fc = new JFileChooser(myPath);
 		int returnVal = fc.showOpenDialog(this);
 		String filename = "";
 		if(returnVal==JFileChooser.APPROVE_OPTION) {
@@ -343,7 +341,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			filename = null;
 		}
 		
-		filePathRemembered = filename;
 		return filename;		
 	}
 

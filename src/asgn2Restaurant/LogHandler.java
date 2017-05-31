@@ -110,12 +110,14 @@ public class LogHandler {
 		String customerCode = lineArray[4];
 		String name = lineArray[2];
 		String mobileNumber = lineArray[3];
-		int locX = Integer.parseInt(lineArray[5]);
-		int locY = Integer.parseInt(lineArray[6]);
+		
+		
 		
 		try{
-		return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
-		} catch(CustomerException e) {
+			int locX = Integer.parseInt(lineArray[5]);
+			int locY = Integer.parseInt(lineArray[6]);
+			return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
+		} catch(CustomerException | NumberFormatException e) {
 			throw new CustomerException(e);
 		}
 		

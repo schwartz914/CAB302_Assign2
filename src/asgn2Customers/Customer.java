@@ -48,8 +48,13 @@ public abstract class Customer {
 			throw new CustomerException("Customer phone is invalid");
 		}
 		//Need to check if distance is too great
-		locX = locationX;
-		locY = locationY;
+		if(locationX > 10 || locationY > 10) {
+			throw new CustomerException("Customer is unable to have delivery!");
+		} else {
+			locX = locationX;
+			locY = locationY;
+		}
+		
 		cusType = type;
 	}
 	
