@@ -56,10 +56,13 @@ public abstract class Pizza  {
 			throw new PizzaException("Pizza Exception: Orders cannot be placed after 11:00pm.");
 		}
 		// MAY NEED TO EVALUATE deliveryTime
-		
+		if(orderTime.plusMinutes(70).isAfter(deliveryTime)){
+			this.deliveryTime = deliveryTime;
+		}else{
+			throw new PizzaException("Pizza Exception: The Pizza takes too long to deliver.");
+		}
 		// Assign values
 		this.price = price; //Pretty sure this gets assigned in calculate cost
-		this.deliveryTime = deliveryTime;
 		
 	}
 

@@ -35,7 +35,6 @@ public class MargheritaPizza extends Pizza {
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
 		
-		//Need to fix this to throw exception somehow
 		super(quantity, orderTime, deliveryTime, "Margherita", 8);
 	}
 
