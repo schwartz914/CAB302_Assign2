@@ -376,6 +376,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		} catch(PizzaException e) {
 			txtrWelcomeToPizza.setText(e.getMessage());
 		}
+		customerComboBox.removeAllItems();
 				
 		for(int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
 			try {
@@ -468,6 +469,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		customerComboBox.setEnabled(false);
 		//Enable load log file
 		loadLogFileB.setEnabled(true);
+		restaurant.resetDetails();
 	}
 
 	@Override

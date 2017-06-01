@@ -38,25 +38,25 @@ public class LogHandlerPizzaTests {
 	
 	@Test
 	public void workingFileTest() throws PizzaException, LogHandlerException, CustomerException {
-		boolean result = pizzaPalace.processLog("20170101.txt");
+		boolean result = pizzaPalace.processLog(".\\logs\\20170101.txt");
 		assertTrue(result);
 	}
 	
 	@Test
 	public void workingCustomer() throws PizzaException, LogHandlerException, CustomerException {
 		Customer expected = new DroneDeliveryCustomer("Casey Jones", "0123456789", 5, 5);
-		pizzaPalace.processLog("20170101.txt");
+		pizzaPalace.processLog(".\\logs\\20170101.txt");
 		String value = pizzaPalace.getCustomerByIndex(0).getName();
 		assertEquals(expected.getName(), value);
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void brokenFileTest() throws PizzaException, LogHandlerException, CustomerException {
-		boolean result = pizzaPalace.processLog("PizzaLogTests.txt");
+		boolean result = pizzaPalace.processLog(".\\logs\\PizzaLogTests.txt");
 		assertTrue(result);
 	}
 	
-	@Test (expected = IOException.class)
+	@Test (expected = LogHandlerException.class)
 	public void noFileTest() throws PizzaException, LogHandlerException, CustomerException {
 		boolean result = pizzaPalace.processLog("FakeFile.txt");
 	}

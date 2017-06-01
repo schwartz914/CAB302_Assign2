@@ -24,7 +24,7 @@ public class PizzaRestaurant {
 
 	private ArrayList<Customer> customers;
 	private ArrayList<Pizza> pizzas;
-	//private ArrayList<PizzaRestaurant> pizzaRestaurant;
+
 
 	
 	/**
@@ -156,8 +156,8 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		this.customers.clear();
-		this.pizzas.clear();
+		customers.clear();
+		pizzas.clear();
 	}
 
 }
