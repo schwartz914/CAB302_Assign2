@@ -5,11 +5,13 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.text.DefaultCaret;
+
 
 import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
@@ -56,10 +58,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JTextField totalDistanceF;
 	private PizzaRestaurant restaurant;
 	private JTextArea txtrWelcomeToPizza;
-	private JButton btnLoadCustomerInfo;
-	private JButton btnLoadOrderInfo;
+	private JButton btnPreviousRecord;
+	private JButton btnNextRecord;
 	private JButton btnReset;
 	private JButton btnCalculateTotals;
+	private JButton loadRecord;
 	private JButton loadLogFileB;
 	private JComboBox<String> customerComboBox;
 	private JLabel numCustomers;
@@ -303,23 +306,29 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnReset.setBounds(364, 33, 70, 23);
 		contentPane.add(btnReset);
 		
-		btnLoadOrderInfo = new JButton("Load Order Info");
-		btnLoadOrderInfo.addActionListener(this);
-		btnLoadOrderInfo.setEnabled(false);
-		btnLoadOrderInfo.setBounds(478, 392, 114, 23);
-		contentPane.add(btnLoadOrderInfo);
+		btnNextRecord = new JButton("Next >>");
+		btnNextRecord.addActionListener(this);
+		btnNextRecord.setEnabled(false);
+		btnNextRecord.setBounds(478, 392, 114, 23);
+		contentPane.add(btnNextRecord);
 		
-		btnLoadCustomerInfo = new JButton("Load Customer Info");
-		btnLoadCustomerInfo.setBounds(79, 398, 135, 23);
-		btnLoadCustomerInfo.setEnabled(false);
-		contentPane.add(btnLoadCustomerInfo);
-		btnLoadCustomerInfo.addActionListener(this);
+		btnPreviousRecord = new JButton("<< Previous");
+		btnPreviousRecord.setBounds(79, 392, 135, 23);
+		btnPreviousRecord.setEnabled(false);
+		contentPane.add(btnPreviousRecord);
+		btnPreviousRecord.addActionListener(this);
 		
 		loadLogFileB = new JButton("Load Log File");
 		loadLogFileB.addActionListener(this);
 		loadLogFileB.setEnabled(true);
 		loadLogFileB.setBounds(240, 33, 114, 23);
 		contentPane.add(loadLogFileB);
+		
+		loadRecord = new JButton("Load Record");
+		loadRecord.setBounds(290,392,110,23);
+		loadRecord.setEnabled(false);
+		contentPane.add(loadRecord);
+		loadRecord.addActionListener(this);
 		//--------------------------------------------------	
 				
 		
@@ -352,10 +361,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			resetGUI();
 		} else if(command == "Load Log File") {
 			loadLogFileButton(arg0);
-		} else if(command == "Load Order Info") {
-			displayOrderDetailsButton();
-		} else if(command == "Load Customer Info") {
-			displayCustomerDetailsButton();
+		} else if(command == "<< Previous" || command == "Next >>") {
+			previousNextButton(command);
 		} else if(command == "Calculate Totals") {
 			calculateTotalsButton();
 		}
@@ -382,15 +389,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			try {
 				customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
 			} catch (CustomerException e) {
-				// TODO Auto-generated catch block
+				
 				txtrWelcomeToPizza.setText(e.getMessage());
 			}
 		}
 		
 		//Activate other components
 		loadLogFileB.setEnabled(false);
-		btnLoadCustomerInfo.setEnabled(true);
-		btnLoadOrderInfo.setEnabled(true);
+		btnPreviousRecord.setEnabled(true);
+		btnNextRecord.setEnabled(true);
 		btnReset.setEnabled(true);
 		btnCalculateTotals.setEnabled(true);
 		customerComboBox.setEnabled(true);
@@ -398,10 +405,25 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		} //end if
 	}
 	
-	private void displayCustomerDetailsButton() {
-		int value = customerComboBox.getSelectedIndex();
-		//if(restaurant.getCustomerByIndex(value).getCustomerType() == )
-		// Change values of fields to correct values
+	
+	private void previousNextButton(String buttonPress) {
+		int value;
+		if(buttonPress.equals("<< Previous")) {
+			if(customerComboBox.getSelectedIndex() == 0) {
+				value = customerComboBox.getItemCount()-1;
+			} else {
+				value = customerComboBox.getSelectedIndex()-1;
+			}
+			customerComboBox.setSelectedIndex(value);
+		} else {
+			if(customerComboBox.getSelectedIndex() == customerComboBox.getItemCount()-1) {
+				value = 0;
+			} else {
+				value = customerComboBox.getSelectedIndex()+1;
+			}
+			customerComboBox.setSelectedIndex(value);
+		}
+		
 		
 		try {
 			txtCustomername.setText(restaurant.getCustomerByIndex(value).getName());
@@ -409,38 +431,30 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtCustomertype.setText(restaurant.getCustomerByIndex(value).getCustomerType());
 			txtLocation.setText(restaurant.getCustomerByIndex(value).getLocationX() + ", " + restaurant.getCustomerByIndex(value).getLocationY());
 			txtDistance.setText(Double.toString(restaurant.getCustomerByIndex(value).getDeliveryDistance()));
-			txtrWelcomeToPizza.setText("Successfully loaded customer info! :)");
-		} catch (CustomerException e) {
-			// TODO Auto-generated catch block
-			txtrWelcomeToPizza.setText("Error loading the customer info! :(");
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
-	private void displayOrderDetailsButton() {
-		int value = customerComboBox.getSelectedIndex();
-		
-		try {
 			txtType.setText(restaurant.getPizzaByIndex(value).getPizzaType());
 			txtQuantity.setText(Integer.toString(restaurant.getPizzaByIndex(value).getQuantity()));
 			txtPrice.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderPrice()));
 			txtCost.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderCost()));
 			txtProfit.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderProfit()));
-			txtrWelcomeToPizza.setText("Successfully loaded order info! :)");
+			txtrWelcomeToPizza.setText("Successfully loaded Record info! :)");
 		} catch(PizzaException e) {
 			txtrWelcomeToPizza.setText(e.getMessage());
-			txtrWelcomeToPizza.setText("Error loading the order info! :(");
-		}		
+			txtrWelcomeToPizza.setText("Error loading the Records info! :(");
+		} catch(CustomerException e) {
+			txtrWelcomeToPizza.setText(e.getMessage());
+			txtrWelcomeToPizza.setText("Error loading the Records info! :(");
+		}
 	}
 	
 	private void calculateTotalsButton() {
-			//Change fields to correct values
-			totalProfitF.setText(Double.toString(Math.round(restaurant.getTotalProfit())));
-			totalDistanceF.setText(Double.toString(Math.round(restaurant.getTotalDeliveryDistance())));
-			//Disable button
-			//btnCalculateTotals.setEnabled(false);
+
+		BigDecimal profit = new BigDecimal(restaurant.getTotalProfit());
+		BigDecimal distance = new BigDecimal(restaurant.getTotalDeliveryDistance());
+		profit = profit.setScale(2, RoundingMode.HALF_UP);
+		distance = distance.setScale(2, RoundingMode.HALF_UP);
+		totalProfitF.setText(profit.toString());
+		totalDistanceF.setText(distance.toString());
+
 		}
 	
 	private void resetGUI() {
@@ -462,8 +476,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		totalDistanceF.setText("0");
 		
 		//Disable all the buttons
-		btnLoadCustomerInfo.setEnabled(false);
-		btnLoadOrderInfo.setEnabled(false);
+		btnPreviousRecord.setEnabled(false);
+		btnPreviousRecord.setEnabled(false);
 		btnReset.setEnabled(false);
 		btnCalculateTotals.setEnabled(false);
 		customerComboBox.setEnabled(false);
