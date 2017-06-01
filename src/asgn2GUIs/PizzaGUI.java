@@ -62,7 +62,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JButton btnNextRecord;
 	private JButton btnReset;
 	private JButton btnCalculateTotals;
-	private JButton loadRecord;
 	private JButton loadLogFileB;
 	private JComboBox<String> customerComboBox;
 	private JLabel numCustomers;
@@ -282,6 +281,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		customerComboBox.setEnabled(false);
 		customerComboBox.setBounds(297, 152, 100, 22);
 		contentPane.add(customerComboBox);
+		customerComboBox.addActionListener(this);
 		//--------------------------------------------------
 		
 		// ---- Create JTextArea ----
@@ -324,11 +324,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		loadLogFileB.setBounds(240, 33, 114, 23);
 		contentPane.add(loadLogFileB);
 		
-		loadRecord = new JButton("Load Record");
-		loadRecord.setBounds(290,392,110,23);
-		loadRecord.setEnabled(false);
-		contentPane.add(loadRecord);
-		loadRecord.addActionListener(this);
+
 		//--------------------------------------------------	
 				
 		
@@ -361,11 +357,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			resetGUI();
 		} else if(command == "Load Log File") {
 			loadLogFileButton(arg0);
-		} else if(command == "<< Previous" || command == "Next >>") {
-			previousNextButton(command);
+		} else if(command == "<< Previous" || command == "Next >>" || command == "comboBoxChanged") {
+			processRecord(command);
 		} else if(command == "Calculate Totals") {
 			calculateTotalsButton();
 		}
+
 	}
 	
 	private void loadLogFileButton(ActionEvent arg0) {
@@ -406,7 +403,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 	
 	
-	private void previousNextButton(String buttonPress) {
+	private void processRecord(String buttonPress) {
 		int value;
 		if(buttonPress.equals("<< Previous")) {
 			if(customerComboBox.getSelectedIndex() == 0) {
@@ -415,13 +412,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				value = customerComboBox.getSelectedIndex()-1;
 			}
 			customerComboBox.setSelectedIndex(value);
-		} else {
+		} else if(buttonPress.equals("Next >>")) {
 			if(customerComboBox.getSelectedIndex() == customerComboBox.getItemCount()-1) {
 				value = 0;
 			} else {
 				value = customerComboBox.getSelectedIndex()+1;
 			}
 			customerComboBox.setSelectedIndex(value);
+		} else {
+			value = customerComboBox.getSelectedIndex();
 		}
 		
 		
@@ -437,13 +436,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtCost.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderCost()));
 			txtProfit.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderProfit()));
 			txtrWelcomeToPizza.setText("Successfully loaded Record info! :)");
-		} catch(PizzaException e) {
-			txtrWelcomeToPizza.setText(e.getMessage());
-			txtrWelcomeToPizza.setText("Error loading the Records info! :(");
-		} catch(CustomerException e) {
-			txtrWelcomeToPizza.setText(e.getMessage());
-			txtrWelcomeToPizza.setText("Error loading the Records info! :(");
+		} catch(PizzaException | CustomerException e) {
+			txtrWelcomeToPizza.setText("Error loading the Records info! :( :" + e.getMessage());
 		}
+
+
 	}
 	
 	private void calculateTotalsButton() {
@@ -477,7 +474,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		//Disable all the buttons
 		btnPreviousRecord.setEnabled(false);
-		btnPreviousRecord.setEnabled(false);
+		btnNextRecord.setEnabled(false);
 		btnReset.setEnabled(false);
 		btnCalculateTotals.setEnabled(false);
 		customerComboBox.setEnabled(false);
