@@ -375,40 +375,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 	
 	private void loadLogFileButton(ActionEvent arg0) {
-		String filename = openFileChooser(arg0);
-		
-	// Run program on the file if the user selects an option.
-		if(filename != null) {
 		try {
-			restaurant.processLog(filename);
-			//If load correctly output:
-			txtrWelcomeToPizza.setText("Successfully loaded the log file! :)");
-			numCustomers.setText(Integer.toString(restaurant.getNumCustomerOrders()));
-		} catch (CustomerException |  LogHandlerException e) {
-			txtrWelcomeToPizza.setText(e.getMessage());
-		} catch(PizzaException e) {
+			String filename = openFileChooser(arg0);
+			
+		// Run program on the file if the user selects an option.
+			if(filename != null) {
+				restaurant.processLog(filename);
+				//If load correctly output:
+				txtrWelcomeToPizza.setText("Successfully loaded the log file! :)");
+				numCustomers.setText(Integer.toString(restaurant.getNumCustomerOrders()));
+		
+				customerComboBox.removeAllItems();
+						
+				for(int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
+					customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
+				}
+				
+				//Activate other components
+				loadLogFileB.setEnabled(false);
+				btnPreviousRecord.setEnabled(true);
+				btnNextRecord.setEnabled(true);
+				btnReset.setEnabled(true);
+				btnCalculateTotals.setEnabled(true);
+				customerComboBox.setEnabled(true);
+			
+			} //end if
+		
+		} catch (LogHandlerException | CustomerException | PizzaException e) {
 			txtrWelcomeToPizza.setText(e.getMessage());
 		}
-		customerComboBox.removeAllItems();
-				
-		for(int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
-			try {
-				customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
-			} catch (CustomerException e) {
-				
-				txtrWelcomeToPizza.setText(e.getMessage());
-			}
-		}
-		
-		//Activate other components
-		loadLogFileB.setEnabled(false);
-		btnPreviousRecord.setEnabled(true);
-		btnNextRecord.setEnabled(true);
-		btnReset.setEnabled(true);
-		btnCalculateTotals.setEnabled(true);
-		customerComboBox.setEnabled(true);
-		
-		} //end if
 	}
 	
 	

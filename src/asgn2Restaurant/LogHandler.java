@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
 import asgn2Customers.CustomerFactory;
@@ -74,16 +75,16 @@ public class LogHandler {
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
 		// TO DO
 		pizzas = new ArrayList<Pizza>();
-		
-		String filePath = filename;
-		Path path = Paths.get(filePath);
-		Charset charset = Charset.forName("US-ASCII");
-		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
-		    String line = null;
-		    while ((line = reader.readLine()) != null) {
-		    	pizzas.add(LogHandler.createPizza(line));		       
-		    }
-		    reader.close();
+		String path = filename;
+
+		try  {
+			FileReader fr = new FileReader(path);
+			BufferedReader reader = new BufferedReader(fr);
+				String line = null;
+				while((line = reader.readLine()) != null) {
+					pizzas.add(createPizza(line));
+				}
+				reader.close();
 		} catch (PizzaException e) {
 			throw new PizzaException(e.getMessage());
 			
@@ -120,7 +121,6 @@ public class LogHandler {
 		} catch(NumberFormatException e) {
 			throw new CustomerException("Customer Exception: Invalid Location.");
 		}
-		
 	}
 	
 	/**
@@ -136,13 +136,16 @@ public class LogHandler {
 		String lineArray[] = line.split(",");
 		String pizzaCode = lineArray[7];
 		int quantity = Integer.parseInt(lineArray[8]);
-		LocalTime  orderTime = LocalTime.parse(lineArray[0]);
-		LocalTime deliveryTime = LocalTime.parse(lineArray[1]);
+		
 		
 		try{
+			LocalTime  orderTime = LocalTime.parse(lineArray[0]);
+			LocalTime deliveryTime = LocalTime.parse(lineArray[1]);
 			return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
+		}  catch (DateTimeParseException e) {
+			throw new PizzaException("Pizza Exception: invalid Order Time or Delivery Time");
 		} catch(PizzaException e) {
-			throw new PizzaException(e);
+			throw new PizzaException(e.getMessage());
 		}
 	}
 

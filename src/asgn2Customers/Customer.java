@@ -1,6 +1,7 @@
 package asgn2Customers;
 
 
+
 import asgn2Exceptions.CustomerException;
 
 /** An abstract class to represent a customer at the Pizza Palace restaurant.
@@ -36,7 +37,7 @@ public abstract class Customer {
 	 * 
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		if(name.length() <= 20 || name.length() <= 1) {
+		if((name.length() <= 20 || name.length() <= 1) && name.trim() != "") {
 			customerName = name;
 		} else {
 			throw new CustomerException("Customer name is invalid");
