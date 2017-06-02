@@ -63,7 +63,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JButton btnReset;
 	private JButton btnCalculateTotals;
 	private JButton loadLogFileB;
-	private JComboBox<String> customerComboBox;
+	private JComboBox<Object> customerComboBox;
 	private JLabel numCustomers;
 	private JLabel customerNumber;
 	
@@ -286,7 +286,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		//--------------------------------------------------
 		
 		// ---- Create JComboBox ----
-		customerComboBox = new JComboBox<String>();
+		customerComboBox = new JComboBox<Object>();
 		customerComboBox.setEnabled(false);
 		customerComboBox.setBounds(297, 152, 100, 22);
 		contentPane.add(customerComboBox);
@@ -388,7 +388,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				customerComboBox.removeAllItems();
 						
 				for(int i = 0; i < restaurant.getNumCustomerOrders(); i++) {
-					customerComboBox.addItem(restaurant.getCustomerByIndex(i).getName());
+					customerComboBox.addItem(makeObj(restaurant.getCustomerByIndex(i).getName()));
 				}
 				
 				//Activate other components
@@ -405,6 +405,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtrWelcomeToPizza.setText(e.getMessage());
 		}
 	}
+	
+	private Object makeObj(final String item)  {
+	     return new Object() { public String toString() { return item; } };
+	   }
 	
 	
 	private void processRecord(String buttonPress) {
