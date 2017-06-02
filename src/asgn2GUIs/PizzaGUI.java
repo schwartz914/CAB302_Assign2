@@ -65,6 +65,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JButton loadLogFileB;
 	private JComboBox<String> customerComboBox;
 	private JLabel numCustomers;
+	private JLabel customerNumber;
 	
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -166,6 +167,10 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		lblTotalCustomers.setBounds(299, 197, 120, 14);
 		contentPane.add(lblTotalCustomers);
 		
+		JLabel lblRecordNumber = new JLabel("Record Number:");
+		lblRecordNumber.setBounds(299,250,120,14);
+		contentPane.add(lblRecordNumber);
+		
 		JLabel lblTotalProfit = new JLabel("Total Profit:");
 		lblTotalProfit.setBounds(10, 14, 84, 14);
 		panel_2.add(lblTotalProfit);
@@ -175,10 +180,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		panel_2.add(lblTotalDistance);
 		
 		numCustomers = new JLabel("0");
-		numCustomers.setEnabled(false);
 		numCustomers.setHorizontalAlignment(SwingConstants.CENTER);
 		numCustomers.setBounds(324, 222, 46, 14);
 		contentPane.add(numCustomers);
+		
+		customerNumber = new JLabel("0");
+		customerNumber.setHorizontalAlignment(SwingConstants.CENTER);
+		customerNumber.setBounds(324, 275, 46, 14);
+		contentPane.add(customerNumber);
 		
 		JLabel lblOrderCalculations = new JLabel("Order Calculations");
 		lblOrderCalculations.setBounds(99, 431, 140, 14);
@@ -436,6 +445,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtCost.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderCost()));
 			txtProfit.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderProfit()));
 			txtrWelcomeToPizza.setText("Successfully loaded Record info! :)");
+			customerNumber.setText(Integer.toString(value));
 		} catch(PizzaException | CustomerException e) {
 			txtrWelcomeToPizza.setText("Error loading the Records info! :( :" + e.getMessage());
 		}

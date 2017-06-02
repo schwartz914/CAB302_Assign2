@@ -111,14 +111,14 @@ public class LogHandler {
 		String name = lineArray[2];
 		String mobileNumber = lineArray[3];
 		
-		
-		
 		try{
 			int locX = Integer.parseInt(lineArray[5]);
 			int locY = Integer.parseInt(lineArray[6]);
 			return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
-		} catch(CustomerException | NumberFormatException e) {
-			throw new CustomerException(e);
+		} catch(CustomerException e) {
+			throw new CustomerException(e.getMessage());
+		} catch(NumberFormatException e) {
+			throw new CustomerException("Customer Exception: Invalid Location.");
 		}
 		
 	}

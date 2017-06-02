@@ -91,10 +91,11 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
-		if (!this.pizzas.isEmpty() && index >= 0 && index < this.pizzas.size()){
-			return this.pizzas.get(index);
-		}else{
+		if (index < 0 || index > this.pizzas.size()){
 			throw new PizzaException("PizzaException: The index is invalid.");
+			
+		}else{
+			return this.pizzas.get(index);
 		}
 	}
 	

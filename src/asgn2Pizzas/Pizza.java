@@ -55,8 +55,8 @@ public abstract class Pizza  {
 		}else{
 			throw new PizzaException("Pizza Exception: Orders cannot be placed after 11:00pm.");
 		}
-		// MAY NEED TO EVALUATE deliveryTime
-		if(orderTime.plusMinutes(70).isAfter(deliveryTime)){
+		// If the Delivery time is 60mins and 1 second after order time the pizza is thrown out.
+		if(orderTime.plusMinutes(60).plusSeconds(1).isAfter(deliveryTime)){
 			this.deliveryTime = deliveryTime;
 		}else{
 			throw new PizzaException("Pizza Exception: The Pizza takes too long to deliver.");
