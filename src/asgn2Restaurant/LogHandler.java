@@ -119,7 +119,7 @@ public class LogHandler {
 		} catch(CustomerException e) {
 			throw new CustomerException(e.getMessage());
 		} catch(NumberFormatException e) {
-			throw new CustomerException("Customer Exception: Invalid Location.");
+			throw new CustomerException("Customer Exception: Invalid Location given.");
 		}
 	}
 	

@@ -437,12 +437,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtMobilenumber.setText(restaurant.getCustomerByIndex(value).getMobileNumber());
 			txtCustomertype.setText(restaurant.getCustomerByIndex(value).getCustomerType());
 			txtLocation.setText(restaurant.getCustomerByIndex(value).getLocationX() + ", " + restaurant.getCustomerByIndex(value).getLocationY());
-			txtDistance.setText(Double.toString(restaurant.getCustomerByIndex(value).getDeliveryDistance()));
+			txtDistance.setText(convertNumber(restaurant.getCustomerByIndex(value).getDeliveryDistance()));
 			txtType.setText(restaurant.getPizzaByIndex(value).getPizzaType());
 			txtQuantity.setText(Integer.toString(restaurant.getPizzaByIndex(value).getQuantity()));
-			txtPrice.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderPrice()));
-			txtCost.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderCost()));
-			txtProfit.setText(Double.toString(restaurant.getPizzaByIndex(value).getOrderProfit()));
+			txtPrice.setText("$" + convertNumber(restaurant.getPizzaByIndex(value).getOrderPrice()));
+			txtCost.setText("$" + convertNumber(restaurant.getPizzaByIndex(value).getOrderCost()));
+			txtProfit.setText("$" + convertNumber(restaurant.getPizzaByIndex(value).getOrderProfit()));
 			txtrWelcomeToPizza.setText("Successfully loaded Record info! :)");
 			customerNumber.setText(Integer.toString(value));
 		} catch(PizzaException | CustomerException e) {
@@ -453,15 +453,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 	
 	private void calculateTotalsButton() {
-
-		BigDecimal profit = new BigDecimal(restaurant.getTotalProfit());
-		BigDecimal distance = new BigDecimal(restaurant.getTotalDeliveryDistance());
-		profit = profit.setScale(2, RoundingMode.HALF_UP);
-		distance = distance.setScale(2, RoundingMode.HALF_UP);
-		totalProfitF.setText(profit.toString());
-		totalDistanceF.setText(distance.toString());
-
+		totalProfitF.setText("$" + convertNumber(restaurant.getTotalProfit()));
+		totalDistanceF.setText(convertNumber(restaurant.getTotalDeliveryDistance()));
 		}
+	
+	private String convertNumber(Double numberPassed) {
+		BigDecimal number = new BigDecimal(numberPassed);
+		number = number.setScale(2, RoundingMode.HALF_UP);
+		return number.toString();
+	}
 	
 	private void resetGUI() {
 		//Reset all the values to original

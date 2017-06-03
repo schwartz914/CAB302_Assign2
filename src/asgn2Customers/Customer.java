@@ -37,20 +37,19 @@ public abstract class Customer {
 	 * 
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
-		if((name.length() <= 20 || name.length() <= 1) && name.trim() != "") {
-			customerName = name;
+		if(name.length() <= 20 && name.length() > 0 && !name.trim().equals("") && name.matches("['a-zA-Z\\s]+")) {
+			customerName = name;			
 		} else {
-			throw new CustomerException("Customer name is invalid");
+			throw new CustomerException("Customer Exception: Customer name is invalid");
 		}
-		
 		if(mobileNumber.matches("0[0-9]{9}")) {
 			mobileNo = mobileNumber;
 		} else {
-			throw new CustomerException("Customer phone is invalid");
+			throw new CustomerException("Customer Exception: Customer phone is invalid");
 		}
 		//Need to check if distance is too great
-		if(locationX > 10 || locationY > 10) {
-			throw new CustomerException("Customer is unable to have delivery!");
+		if(Math.abs(locationX) > 10 || Math.abs(locationY) > 10) {
+			throw new CustomerException("Customer Exception: To far away to deliver!");
 		} else {
 			locX = locationX;
 			locY = locationY;
