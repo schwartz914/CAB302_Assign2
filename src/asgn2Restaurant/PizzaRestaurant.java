@@ -76,7 +76,7 @@ public class PizzaRestaurant {
 	 * @throws CustomerException if index is invalid.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
-		if(index < 0 || index > this.customers.size()) {
+		if(index < 0 || index > this.customers.size() || customers.isEmpty()) {
 			throw new CustomerException("CustomerException: The index is invalid.");
 		} else {
 			return this.customers.get(index);
