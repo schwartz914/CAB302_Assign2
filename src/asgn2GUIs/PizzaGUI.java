@@ -13,11 +13,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 
-import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
-import asgn2Pizzas.Pizza;
 import asgn2Restaurant.PizzaRestaurant;
 
 import java.awt.*;
@@ -34,7 +32,7 @@ import javax.swing.*;
  * You can also use this class and asgn2Wizards.PizzaWizard to test your system as a whole
  * 
  * 
- * @author Person A and Person B
+ * @author Brodie Birkett and Peter Schwartz
  *
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
@@ -73,9 +71,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 */
 	public PizzaGUI(String title) {
 		// TO DO
+		super(title);
 		restaurant = new PizzaRestaurant();
 		
 		// ---- Create the Frame and main JPanel ----
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 699, 601);
@@ -342,8 +342,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		//--------------------------------------------------
 	}	
 	
-	// Method that creates/opens file chooser
-	private String openFileChooser(ActionEvent arg0) {
+	/**
+	 * Opens the JFileChooser dialog for the user to select the log file to load.
+	 * 
+	 * 
+	 * @return filename - the absolute path of the targeted file to be open.
+	 */
+	private String openFileChooser() {
 		String myPath = ".\\logs\\";
 		final JFileChooser fc = new JFileChooser(myPath);
 		int returnVal = fc.showOpenDialog(this);
@@ -359,13 +364,17 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	}
 
 
-
+	/**
+	 * ActionPerformed. When the user selects an option on the screen (Buttons or ComboBox) and 
+	 * applies the appropriate action.
+	 * 
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		String command = arg0.getActionCommand();
 		if(command == "Reset") {
 			resetGUI();
 		} else if(command == "Load Log File") {
-			loadLogFileButton(arg0);
+			loadLogFileButton();
 		} else if(command == "<< Previous" || command == "Next >>" || command == "comboBoxChanged") {
 			processRecord(command);
 		} else if(command == "Calculate Totals") {
@@ -373,10 +382,15 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 
 	}
-	
-	private void loadLogFileButton(ActionEvent arg0) {
+	/**
+	 * When the user selects the Load Log file button. Opens the JFileChooser and then verifies that
+	 * the file selected is valid and processes the log file. Also puts entries into the combobox
+	 *  Catches exceptions and displays the information on the screen.
+	 * 
+	 */
+	private void loadLogFileButton() {
 		try {
-			String filename = openFileChooser(arg0);
+			String filename = openFileChooser();
 			
 		// Run program on the file if the user selects an option.
 			if(filename != null) {
@@ -405,12 +419,20 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			txtrWelcomeToPizza.setText(e.getMessage());
 		}
 	}
-	
+	/**
+	 * Creates an Object for the combobox and returns that value in a string format.
+	 * @param item
+	 * @return Object
+	 */
 	private Object makeObj(final String item)  {
 	     return new Object() { public String toString() { return item; } };
 	   }
 	
-	
+	/**
+	 * Processes  the Next, Previous and Combobox items. Adjusts their values and displays data
+	 * for those in the Fields or catches an exception and displays the error.
+	 * @param buttonPress - The value of the user interaction.
+	 */
 	private void processRecord(String buttonPress) {
 		int value;
 		if(buttonPress.equals("<< Previous")) {
@@ -451,18 +473,26 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 
 	}
-	
+	/**
+	 * Set the values for the Total Profit and Total Distance traveled textfields with appropriate formatting
+	 */
 	private void calculateTotalsButton() {
 		totalProfitF.setText("$" + convertNumber(restaurant.getTotalProfit()));
 		totalDistanceF.setText(convertNumber(restaurant.getTotalDeliveryDistance()));
 		}
-	
+	/**
+	 * Accepts a double as the parameter that then formats the double as a Big Decimal to 2 decimal places.
+	 * @param numberPassed - the value needing to be formatted.
+	 * @return a string value of the formatted value of number
+	 */
 	private String convertNumber(Double numberPassed) {
 		BigDecimal number = new BigDecimal(numberPassed);
 		number = number.setScale(2, RoundingMode.HALF_UP);
 		return number.toString();
 	}
-	
+	/**
+	 * Resets the gui after the user selects Reset as an option.
+	 */
 	private void resetGUI() {
 		//Reset all the values to original
 		txtCustomername.setText("Name");

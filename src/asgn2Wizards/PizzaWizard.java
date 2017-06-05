@@ -26,7 +26,7 @@ public class PizzaWizard {
 	 */
 	public static void main(String[] args) {
 
-		new PizzaGUI("Pizza Place");
+		new PizzaGUI("Pizza Palace");
 
 		
 	}
