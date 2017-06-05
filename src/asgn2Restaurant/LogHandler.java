@@ -4,10 +4,6 @@ package asgn2Restaurant;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -54,10 +50,10 @@ public class LogHandler {
 				customers.add(createCustomer(line));
 			}
 			reader.close();
-		} catch (CustomerException e) {
-			throw new CustomerException(e.getMessage());
+		} catch (CustomerException | LogHandlerException e) {
+			throw e;
 			
-		} catch(LogHandlerException | IOException e) {
+		} catch(IOException e) {
 			throw new LogHandlerException(e.getMessage());
 		}
 		
@@ -85,10 +81,9 @@ public class LogHandler {
 					pizzas.add(createPizza(line));
 				}
 				reader.close();
-		} catch (PizzaException e) {
-			throw new PizzaException(e.getMessage());
-			
-		} catch(LogHandlerException | IOException e) {
+		} catch (PizzaException | LogHandlerException e) {
+			throw e;
+		} catch(IOException e) {
 			throw new LogHandlerException(e.getMessage());
 		}
 		return pizzas;
@@ -117,7 +112,7 @@ public class LogHandler {
 			int locY = Integer.parseInt(lineArray[6]);
 			return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locX, locY);
 		} catch(CustomerException e) {
-			throw new CustomerException(e.getMessage());
+			throw e;
 		} catch(NumberFormatException e) {
 			throw new CustomerException("Customer Exception: Invalid Location given.");
 		}
@@ -145,7 +140,7 @@ public class LogHandler {
 		}  catch (DateTimeParseException e) {
 			throw new PizzaException("Pizza Exception: invalid Order Time or Delivery Time");
 		} catch(PizzaException e) {
-			throw new PizzaException(e.getMessage());
+			throw e;
 		}
 	}
 

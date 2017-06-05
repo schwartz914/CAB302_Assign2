@@ -123,7 +123,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		CustomerTypeL.setBounds(40, 116, 90, 14);
 		panel.add(CustomerTypeL);
 		
-		JLabel xyLocL = new JLabel("X and Y Location:");
+		JLabel xyLocL = new JLabel("Customer Location:");
 		xyLocL.setBounds(20, 172, 150, 14);
 		panel.add(xyLocL);
 		
@@ -204,35 +204,35 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		txtCustomername.setToolTipText("");
 		txtCustomername.setEditable(false);
 		txtCustomername.setColumns(10);
-		txtCustomername.setBounds(134, 11, 86, 20);
+		txtCustomername.setBounds(138, 11, 100, 20);
 		panel.add(txtCustomername);
 		
 		txtMobilenumber = new JTextField();
 		txtMobilenumber.setText("Mobilenumber");
 		txtMobilenumber.setEditable(false);
 		txtMobilenumber.setColumns(10);
-		txtMobilenumber.setBounds(134, 63, 86, 20);
+		txtMobilenumber.setBounds(138, 63, 100, 20);
 		panel.add(txtMobilenumber);
 		
 		txtCustomertype = new JTextField();
 		txtCustomertype.setText("Customertype");
 		txtCustomertype.setEditable(false);
 		txtCustomertype.setColumns(10);
-		txtCustomertype.setBounds(134, 113, 86, 20);
+		txtCustomertype.setBounds(138, 113, 100, 20);
 		panel.add(txtCustomertype);
 		
 		txtLocation = new JTextField();
 		txtLocation.setText("Location");
 		txtLocation.setEditable(false);
 		txtLocation.setColumns(10);
-		txtLocation.setBounds(134, 169, 86, 20);
+		txtLocation.setBounds(138, 169, 100, 20);
 		panel.add(txtLocation);
 		
 		txtDistance = new JTextField();
 		txtDistance.setText("Distance");
 		txtDistance.setEditable(false);
 		txtDistance.setColumns(10);
-		txtDistance.setBounds(134, 221, 86, 20);
+		txtDistance.setBounds(138, 221, 100, 20);
 		panel.add(txtDistance);
 		
 		txtType = new JTextField();

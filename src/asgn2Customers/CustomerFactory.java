@@ -35,7 +35,7 @@ public class CustomerFactory {
 		} else if(customerCode.equals("DVC")) {
 			return new DriverDeliveryCustomer(name, mobileNumber, locationX, locationY);
 		} else {
-			throw new CustomerException("That is not a valid CustomerCode.");
+			throw new CustomerException("Customer Exception: That is not a valid CustomerCode.");
 		}
 	}
 }
