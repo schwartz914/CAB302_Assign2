@@ -479,6 +479,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private void calculateTotalsButton() {
 		totalProfitF.setText("$" + convertNumber(restaurant.getTotalProfit()));
 		totalDistanceF.setText(convertNumber(restaurant.getTotalDeliveryDistance()));
+			txtrWelcomeToPizza.setText("Successfully calculated totals! :)");
 		}
 	/**
 	 * Accepts a double as the parameter that then formats the double as a Big Decimal to 2 decimal places.
@@ -510,6 +511,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		totalProfitF.setText("0");
 		totalDistanceF.setText("0");
+		numCustomers.setText("0");
+		customerNumber.setText("0");
 		
 		//Disable all the buttons
 		btnPreviousRecord.setEnabled(false);
