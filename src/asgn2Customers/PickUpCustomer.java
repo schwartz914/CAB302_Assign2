@@ -7,7 +7,7 @@ import asgn2Exceptions.CustomerException;
  *  distance should be zero.  A description of the class's fields and their constraints is provided 
  *  in Section 5.2 of the Assignment Specification.
  *
- * @author Person B
+ * @author Peter Schwartz
  *
  */
 public class PickUpCustomer extends Customer {
@@ -23,7 +23,8 @@ public class PickUpCustomer extends Customer {
 	 * @param mobileNumber - The customer mobile number
 	 * @param locationX - The customer x location relative to the Pizza Palace Restaurant measured in units of 'blocks' 
 	 * @param locationY  The customer y location relative to the Pizza Palace Restaurant measured in units of 'blocks' 
-	 * @throws CustomerException if supplied parameters are invalid
+	 * @throws CustomerException if name is invalid, mobile number does not start with 0 and contain 10 digits and if the location is more than
+	 * 10blocks in any direction.
 	 * 
 	 */
 	public PickUpCustomer(String name, String mobileNumber, int locationX,  int locationY) throws CustomerException {
