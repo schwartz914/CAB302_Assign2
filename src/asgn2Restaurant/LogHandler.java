@@ -21,7 +21,7 @@ import asgn2Pizzas.PizzaFactory;
  * and Customer object - either as an individual Pizza/Customer object or as an
  * ArrayList of Pizza/Customer objects.
  * 
- * @author Person A and Person B
+ * @author Brodie Birkett and Peter Schwartz
  *
  */
 public class LogHandler {
@@ -34,8 +34,8 @@ public class LogHandler {
 	 * @param filename The file name of the log file
 	 * @return an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file. 
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
-	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
-	 * @throws  
+	 * @throws LogHandlerException if the log file is unable to be found.
+	 * @throws CustomerException if the Type of customer is not valid or if any details are incorrect
 	 * 
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
@@ -50,10 +50,9 @@ public class LogHandler {
 				customers.add(createCustomer(line));
 			}
 			reader.close();
-		} catch (CustomerException | LogHandlerException e) {
+		} catch (CustomerException e) {
 			throw e;
-			
-		} catch(IOException e) {
+		} catch(IOException | LogHandlerException e) {
 			throw new LogHandlerException(e.getMessage());
 		}
 		
@@ -64,8 +63,8 @@ public class LogHandler {
 	 * Returns an ArrayList of Pizza objects from the information contained in the log file ordered as they appear in the log file. .
 	 * @param filename The file name of the log file
 	 * @return an ArrayList of Pizza objects from the information contained in the log file ordered as they appear in the log file. .
-	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
-	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
+	 * @throws PizzaException If the Type of pizza is invalid or any of the pizza fields are invalid.
+	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors 
 	 * 
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{

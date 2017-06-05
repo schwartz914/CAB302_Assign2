@@ -17,7 +17,7 @@ import asgn2Pizzas.Pizza;
  *  Any exceptions raised by one of the methods called by this class should be passed to asgn2GUIs.PizzaGUI so that it can be shown to
  *  the user.
  * 
- * @author Person A and Person B
+ * @author Brodie Birkett and Peter Schwartz
  *
  */
 public class PizzaRestaurant {
@@ -25,8 +25,6 @@ public class PizzaRestaurant {
 	private ArrayList<Customer> customers;
 	private ArrayList<Pizza> pizzas;
 
-
-	
 	/**
 	 * Creates an instance of the PizzaRestaurant and sets the customers and pizzas fields to
 	 * an appropriate initial empty state. 
@@ -51,9 +49,9 @@ public class PizzaRestaurant {
      * 
 	 * @param filename The log's filename
 	 * @return true if the file was process correctly otherwise false
-	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
-	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
-	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above (passed by another class).
+	 * @throws CustomerException Rethrows exception if any of the customer information in the logfile is incorrect
+	 * @throws PizzaException Rethrows exception if any of the pizza information in the logfile is incorrect
+	 * @throws LogHandlerException Rethrows and logfile errors including file not found errors
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
@@ -62,7 +60,7 @@ public class PizzaRestaurant {
 			customers = LogHandler.populateCustomerDataset(filename);
 			pizzas = LogHandler.populatePizzaDataset(filename);
 			return true;
-		}catch(LogHandlerException | CustomerException e){
+		}catch(LogHandlerException | CustomerException | PizzaException e){
 			throw e;
 		} 
 	}
@@ -71,7 +69,7 @@ public class PizzaRestaurant {
 	 * Returns the Customer object contained at the specified index of the customers field. The index should be the same as the index in the log file.
 	 * @param index - The index within the customers field to retrieve.
 	 * @return The Customer object located at the specified index.
-	 * @throws CustomerException if index is invalid.
+	 * @throws CustomerException if the index is outside the customers size.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		if(index < 0 || index > this.customers.size() || customers.isEmpty()) {
@@ -85,7 +83,7 @@ public class PizzaRestaurant {
 	 * Returns the Pizza object contained at the specified index of the pizzas field. The index should be the same as the index in the log file.
 	 * @param index - The index within the pizzas field to retrieve.
 	 * @return The Pizza object located at the specified index.
-	 * @throws PizzaException if index is invalid.
+	 * @throws PizzaException if the index is outside the pizzas size.
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
