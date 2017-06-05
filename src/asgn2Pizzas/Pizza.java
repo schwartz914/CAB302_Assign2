@@ -11,7 +11,7 @@ import asgn2Exceptions.PizzaException;
  * Each of these subclasses have a different set of toppings. A description of the class's fields
  * and their constraints is provided in Section 5.1 of the Assignment Specification. 
  * 
- * @author Person A
+ * @author Brodie Birkett
  *
  */
 public abstract class Pizza  {
@@ -35,7 +35,8 @@ public abstract class Pizza  {
 	 * @param deliveryTime - The time that the pizza was delivered to the customer
 	 * @param type -  A human understandable description of this Pizza type
 	 * @param price - The price that the pizza is sold to the customer
-	 * @throws PizzaException if supplied parameters are invalid 
+	 * @throws PizzaException if Pizza Quantities are less than 0 or greater than 10, if the type of pizza is not one that exists,
+	 * if the order time is between 23:00:01 and 06:59:59 and if the pizza delivery is 60minutes and 1 sec or more after the order time.
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
@@ -51,7 +52,7 @@ public abstract class Pizza  {
 		}else{
 			throw new PizzaException("Pizza Exception: The type of pizza is invalid.");
 		}
-		if(LocalTime.of(23, 00, 00).isAfter(orderTime) && LocalTime.of(07, 00, 00).isBefore(orderTime)){
+		if(LocalTime.of(23, 00, 01).isAfter(orderTime) && LocalTime.of(06, 59, 59).isBefore(orderTime)){
 			this.orderTime = orderTime;
 		}else{
 			throw new PizzaException("Pizza Exception: Orders cannot be placed after 11:00pm.");

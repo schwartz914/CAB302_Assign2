@@ -12,7 +12,7 @@ import asgn2Exceptions.PizzaException;
  *  The margherita pizza has certain toppings listed in Section 5.1 of the Assignment Specification Document.  
  *  A description of the class's fields and their constraints is provided in Section 5.1 of the Assignment Specification.
  * 
- * @author Person A
+ * @author Brodie Birkett
  *
  */
 public class MargheritaPizza extends Pizza {
@@ -29,8 +29,8 @@ public class MargheritaPizza extends Pizza {
 	 * @param quantity - The number of pizzas ordered 
 	 * @param orderTime - The time that the pizza order was made and sent to the kitchen 
 	 * @param deliveryTime - The time that the pizza was delivered to the customer
-	 * @throws PizzaException if supplied parameters are invalid 
-	 *
+	 * @throws PizzaException if Pizza Quantities are less than 0 or greater than 10, if the type of pizza is not one that exists,
+	 * if the order time is between 23:00:01 and 06:59:59 and if the pizza delivery is 60minutes and 1 sec or more after the order time.
 	 */
 	public MargheritaPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
 		// TO DO
