@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  * asgn2Customers.DroneDeliveryCustomer classes. Note that an instance of asgn2Customers.DriverDeliveryCustomer 
  * should be used to test the functionality of the  asgn2Customers.Customer abstract class. 
  * 
- * @author Person A
+ * @author Brodie Birkett
  * 
  *
  */
@@ -34,13 +34,7 @@ public class CustomerTests {
 	// Customer.java Tests (Using DriverDeliveryCustomer)
 		// --- Customer() Tests	---
 		
-		// Test CustomerException thrown if one of above not correct
-		// Type isn't “Pick Up”, “Driver Delivery” or “Drone Delivery”
-		@Test(expected = CustomerException.class)
-		public void incorrectType() throws CustomerException {
-			//Customer testCustomer = new Customer();
-			assertEquals(dlCustomer.getCustomerType(), "DriverDelivery"); // NOT SURE HOW TO TEST THIS
-		}
+
 		// Customer name between 1 & 20
 		@Test(expected = CustomerException.class)
 		public void nameMax() throws CustomerException {
@@ -152,7 +146,7 @@ public class CustomerTests {
 		public void deliveryDistanceCorrectDD() throws CustomerException {
 			double storeLocationX = 0;
 			double storeLocationY = 0;
-			DroneDeliveryCustomer ddCustomer = new DroneDeliveryCustomer("Jimmy", "0412345678", 11, 6);
+			DroneDeliveryCustomer ddCustomer = new DroneDeliveryCustomer("Jimmy", "0412345678", 10, 6);
 			double expectedDeliveryDistance = Math.sqrt(Math.pow((storeLocationX + ddCustomer.getLocationX()), 2) + Math.pow((storeLocationY + ddCustomer.getLocationY()), 2));
 			assertEquals(ddCustomer.getDeliveryDistance(), expectedDeliveryDistance, 0);
 		}

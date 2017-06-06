@@ -22,7 +22,7 @@ public abstract class Customer {
 	/**
 	 *  This class represents a customer of the Pizza Palace restaurant.  A detailed description of the class's fields
 	 *  and parameters is provided in the Assignment Specification, in particular in Section 5.2. 
-	 *  A CustomerException is thrown if the any of the constraints listed in Section 5.2 of the Assignment Specification
+	 *  A CustomerException is thrown if the any of twwwwwwhe constraints listed in Section 5.2 of the Assignment Specification
 	 *  are violated. 
 	 *  
   	 * <P> PRE: True
@@ -39,7 +39,7 @@ public abstract class Customer {
 	 */
 	public Customer(String name, String mobileNumber, int locationX, int locationY, String type) throws CustomerException{
 		if(name.length() <= 20 && name.length() > 0 && !name.trim().equals("") && name.matches("['a-zA-Z\\s]+")) {
-			customerName = name;			
+			customerName = name;			 
 		} else {
 			throw new CustomerException("Customer Exception: Customer name is invalid");
 		}
@@ -51,6 +51,10 @@ public abstract class Customer {
 		//Need to check if distance is too great
 		if(Math.abs(locationX) > 10 || Math.abs(locationY) > 10) {
 			throw new CustomerException("Customer Exception: To far away to deliver!");
+		} else if (type != "PickUp" && locationX == 0 && locationY == 0) {
+			throw new CustomerException("Customer Exception: Customer is at the store.");
+		} else if (type == "PickUp" && locationX != 0 && locationY != 0) {
+			throw new CustomerException("Customer Exception: Customer is not at the store.");
 		} else {
 			locX = locationX;
 			locY = locationY;
