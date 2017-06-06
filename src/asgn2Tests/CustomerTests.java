@@ -34,7 +34,7 @@ public class CustomerTests {
 	// Customer.java Tests (Using DriverDeliveryCustomer)
 		// --- Customer() Tests	---
 		
-
+		// Test CustomerException thrown if one of below not correct
 		// Customer name between 1 & 20
 		@Test(expected = CustomerException.class)
 		public void nameMax() throws CustomerException {
@@ -146,7 +146,7 @@ public class CustomerTests {
 		public void deliveryDistanceCorrectDD() throws CustomerException {
 			double storeLocationX = 0;
 			double storeLocationY = 0;
-			DroneDeliveryCustomer ddCustomer = new DroneDeliveryCustomer("Jimmy", "0412345678", 10, 6);
+			DroneDeliveryCustomer ddCustomer = new DroneDeliveryCustomer("Jimmy", "0412345678", 11, 6);
 			double expectedDeliveryDistance = Math.sqrt(Math.pow((storeLocationX + ddCustomer.getLocationX()), 2) + Math.pow((storeLocationY + ddCustomer.getLocationY()), 2));
 			assertEquals(ddCustomer.getDeliveryDistance(), expectedDeliveryDistance, 0);
 		}
