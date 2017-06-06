@@ -22,7 +22,7 @@ public abstract class Customer {
 	/**
 	 *  This class represents a customer of the Pizza Palace restaurant.  A detailed description of the class's fields
 	 *  and parameters is provided in the Assignment Specification, in particular in Section 5.2. 
-	 *  A CustomerException is thrown if the any of twwwwwwhe constraints listed in Section 5.2 of the Assignment Specification
+	 *  A CustomerException is thrown if the any of the constraints listed in Section 5.2 of the Assignment Specification
 	 *  are violated. 
 	 *  
   	 * <P> PRE: True

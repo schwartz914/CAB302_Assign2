@@ -36,7 +36,7 @@ public class LogHandler {
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
 	 * @throws LogHandlerException if the log file is unable to be found.
 	 * @throws CustomerException if the Type of customer is not valid or if any details are incorrect
-	 * 
+	 *  
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
@@ -50,9 +50,9 @@ public class LogHandler {
 				customers.add(createCustomer(line));
 			}
 			reader.close();
-		} catch (CustomerException e) {
+		} catch (CustomerException | LogHandlerException e) {
 			throw e;
-		} catch(IOException | LogHandlerException e) {
+		} catch(IOException e) {
 			throw new LogHandlerException(e.getMessage());
 		}
 		

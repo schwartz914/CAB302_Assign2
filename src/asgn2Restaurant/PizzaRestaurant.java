@@ -61,7 +61,7 @@ public class PizzaRestaurant {
 			pizzas = LogHandler.populatePizzaDataset(filename);
 			return true;
 		}catch(LogHandlerException | CustomerException | PizzaException e){
-			throw e;
+			throw e; 
 		} 
 	}
 
