@@ -16,7 +16,7 @@ import asgn2Pizzas.PizzaTopping;
  * Note that an instance of asgn2Pizzas.MeatLoversPizza should be used to test the functionality of the 
  * asgn2Pizzas.Pizza abstract class. 
  * 
- * @author Person B
+ * @author Peter Schwartz
  *
  */
 
@@ -42,7 +42,7 @@ public class PizzaTests {
 	MeatLoversPizza mlPizza2;
 	
 	@Before
-	public void setup() throws PizzaException {
+	public void setup() throws PizzaException { 
 		mlPizza = new MeatLoversPizza(1, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
 		mlPizza2 = new MeatLoversPizza(2, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
 	}
@@ -72,7 +72,7 @@ public class PizzaTests {
 		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
 		assertEquals(2, mlPizza3.getQuantity());
 	}
-
+ 
 	@Test
 	public void CalculateCost() {
 		double expectedValue = 5.0;
@@ -89,7 +89,7 @@ public class PizzaTests {
 	
 	@Test
 	public void totalOrderCost() {
-		double expectedValue = 10.0; // CHANGED THIS TO 10 from 24 as this is COST TO MAKE not PRICE; cost is $5 per ml Pizza * 2 = 10
+		double expectedValue = 10.0; 
 		double getValue = mlPizza2.getOrderCost();
 		assertEquals(expectedValue, getValue, 0);
 	}
@@ -121,4 +121,39 @@ public class PizzaTests {
 		int expectedValue = 2;
 		assertEquals(expectedValue, mlPizza2.getQuantity());
 	}
+	
+	@Test(expected = PizzaException.class)
+	public void invalidOrderTimeLate() throws PizzaException { 
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(23, 00, 01), LocalTime.of(19, 20, 00));
+	}
+	
+	@Test(expected = PizzaException.class)
+	public void invalidOrderTimeEarly() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(06, 59, 59), LocalTime.of(07, 00, 00));
+	}
+	
+	@Test
+	public void edgeOrderTimeEarly() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(19, 00, 00), LocalTime.of(19, 20, 00));
+		assertEquals(2, mlPizza3.getQuantity());
+	}
+	
+	@Test
+	public void edgeOrderTimeLate() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(22, 59, 59), LocalTime.of(23, 20, 00));
+		assertEquals(2, mlPizza3.getQuantity());
+	}
+	
+
+	
+	@Test(expected = PizzaException.class)
+	public void longDeliveryTime() throws PizzaException {
+		MeatLoversPizza mlPizza3;
+		mlPizza3 = new MeatLoversPizza(2, LocalTime.of(19, 00, 00), LocalTime.of(21, 00, 00));
+	}
+	
 }

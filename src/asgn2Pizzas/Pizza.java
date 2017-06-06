@@ -43,22 +43,22 @@ public abstract class Pizza  {
 		// TO DO
 		if(quantity > 0 && quantity <= 10){
 			this.quantity = quantity;
-		}else{
+		}else{ 
 			throw new PizzaException("Pizza Exception: Quantity of pizzas invalid; must order atleast 1 but no more than 10.");
 		}
 		
-		if(type != "Margherita" || type != "Vegetarian" || type != "Meat Lovers”"){
+		if(type == "Margherita" || type == "Vegetarian" || type == "Meat Lovers"){
 			this.type = type;
 		}else{
 			throw new PizzaException("Pizza Exception: The type of pizza is invalid.");
 		}
-		if(LocalTime.of(23, 00, 01).isAfter(orderTime) && LocalTime.of(06, 59, 59).isBefore(orderTime)){
+		if(LocalTime.of(23, 00, 01).isAfter(orderTime) && LocalTime.of(18, 59, 59).isBefore(orderTime)){
 			this.orderTime = orderTime;
 		}else{
 			throw new PizzaException("Pizza Exception: Orders cannot be placed after 11:00pm.");
 		}
 		// If the Delivery time is 60mins and 1 second after order time the pizza is thrown out.
-		if(orderTime.plusMinutes(60).plusSeconds(1).isAfter(deliveryTime)){
+		if(orderTime.plusMinutes(60).plusSeconds(1).isAfter(deliveryTime) || orderTime.plusMinutes(60).plusSeconds(1).equals(LocalTime.of(00,00,00))){
 			this.deliveryTime = deliveryTime;
 		}else{
 			throw new PizzaException("Pizza Exception: The Pizza takes too long to deliver.");
