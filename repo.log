@@ -1,0 +1,576 @@
+* 349896c : Final JDoc generation and Document to PDF
+* c6f9a62 : Added author to docs
+* e651fce : Documentation
+* a9c72ab : updated Tests
+* 65cf803 : More Error checking for customer type and location.
+* f81c10c : Small adjustments. More tests
+* 030648a : Added reset for customer couting lables and sucessful total calculation GUI
+* 81f9f10 : JavaDoc generated
+* d182a9c : Documentation
+* 3149231 : Updated JDoc's
+* 3755ff1 : Commenting for PizzaGui
+* 3bdd2a0 : Updated Documentation for Customers
+* 2616be0 : Fixed exceptions. Rethrowing caught exception instead of throwing new exception.
+* 083c6b3 : updated getCustomerbyIndex
+* 74cc10c : Fixed name checking. Slightly changed the exception reasons.
+* 03a2829 : Changed the comboBox to Object type because duplicate string issue can cause issues.
+* 5a59b63 : Fixed loadLogFileButton try catch to correctly throw the correct statement. Updated Customer and other files.
+* e8073a6 : Added Customer Record on GUI. Clarified exception throwing when parseInt. Corrected the Delivery Check
+* c29e61e : Combobox item will now load the record.
+* 9dfee12 : Add single load details button and added next and previous record buttons
+*   e932b1c : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+|\  
+| * a0fc088 : Added delivery exception for out of date pizza
+| * b6e06d4 : Corrected testing code and cleaned up
+* | ad8f7a1 : Removes items from the combobox at reset. Adjusted loghandlerpizzaTest to goto correct file location
+|/  
+* c0e9695 : Added checks for delivery distance. Changed so open file opens dir to ./logs. Caught parseint exception and returned a customer exception
+* 22f5cc0 : Fixed display problems for totals (rounding) GUI
+* 8d24b15 : Corrected some pizza issues
+* 93815ec : Cleand up GUI Code (grouped and commented)
+* dfc1623 : Fixed up most pizza related exceptions
+* 886ad63 : ActionPerformed Changes. Wrote some private methods to handle the actions. Exception handling and pushing them to the gui
+* 0d93dbd : Moving inline ActionPerformed into method.
+* b78731f : added the ability to remember the last place a file opened.
+*   252b475 : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+|\  
+| *   02cd515 : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+| |\  
+| * \   6c32aa2 : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+| |\ \  
+| * | | 4808648 : PizzaGUI: Added total calculations
+* | | | f911786 : Added the total customers to GUI
+| |_|/  
+|/| |   
+* | | 3a251b9 : getTotalDeliveryDistance done
+| |/  
+|/|   
+* | 393254a : GUI Calculate totals done
+|/  
+* a75f25c : Changed from Mouse Events to action Events.
+* faf1002 : Reversed changes from the merge that broke GUI
+*   a684035 : Merge remote-tracking branch 'origin/asgn2Pizzas_Package_Pizza_Classes'
+|\  
+| *   12c43b5 : Revert "Added some functionality to GUI"
+| |\  
+| * | 8d0491f : Added some functionality to GUI
+| * | ab17224 : Trying to add LogHandlerException to file reader (Uncessessful)
+| * | 58ff575 : Updaated Pizza.java to work with tests, changed one line in test
+| * |   80067fa : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2 into asgn2Pizzas_Package_Pizza_Classes
+| |\ \  
+| * | | cbdd6a1 : Cleaned up GUI code, still needs code for accessing PizzaRestaurant
+* | | | 527b130 : Exception changes.
+| |_|/  
+|/| |   
+* | | 24a406e : Fixed up PizzaGUI. Loads orders. Prints customers to ComboBox. Load order and customer buttons work and fill details.PizzaWizzard now working
+| |/  
+|/|   
+* | c429dbd : Cleaned up LogHandler code and more tests
+* | 1dd0acd : Changed createPizza in loghandler to simpler code.
+|/  
+* ec929f4 : Completed more code in LogHandler. and PizzaRestaurant. Tests in Loghandler done also
+* 33aaef6 : Cleaning up and finishing tests
+* 1f94220 : Added more PizzaFactoryTests
+* 65c7a2f : More code in LogHandler, pizzaRestaurant, pizzaRestaurantTests
+* fda80e4 : Started writing RestaurantPizza Tests
+* 49aaa3c : PizzaFactoryTests
+*   f216a0c : Merged asgn2Pizzas_Package_Pizza_Classes into master
+|\  
+| * 8e772e2 : Created the basic design for PizzaGUI, currently not accessing/calling other files.
+| * 867a081 : Coding done for most Pizzas Package classes
+| * d319c08 : Coding done for most of Pizza Package
+|/  
+* 62bd430 : Wrote tests for LogHandlerCustomerTests.java and CaustomerFactoryTests.java
+*   f93ba32 : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+|\  
+| * 378ffb8 : Fixed Math
+* | 4274b95 : Finished tests for RestaurantCustomerTests.java and added log files used for testing.
+|/  
+* 15848b0 : Added some imports to PizzaResturant.java and started tests for RestaurantCustomerTests.java
+* d2150d0 : Removed unused imports CustomerTests.java
+* e7c3d84 : Completed CustomerTests
+* ee0fed9 : Started writing tests for CustomerTests.java
+* a7a1ac8 : Customer Work done.
+* 4058a7f : Added a bunch of tests for Pizza
+* 7b3b184 : Started Writing Pizza Tests
+*   078d8e1 : Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+|\  
+| * 931a3ba : Added test outlines (in comments) for CustomerFactoryTests, CustomerTests, LogHandlerCustomerTests and RestaurantCustomerTests classes.
+* | d6c45e7 : Started Writing Tests for Pizza
+|/  
+* 07f9fde : Assignment2 Filescommit 349896cff2eb2cd0fb83a287c1e342e4c1c77699
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue Jun 6 13:36:10 2017 +1000
+
+    Final JDoc generation and Document to PDF
+
+commit c6f9a62c735da32deb1c09b1c146f212abe34c4e
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Tue Jun 6 13:27:58 2017 +1000
+
+    Added author to docs
+
+commit e651fcec561ffa51e5ba63a0a1286cd9cfdfb6f0
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue Jun 6 13:18:00 2017 +1000
+
+    Documentation
+
+commit a9c72ab65110f8264617a7734f4a7a372e2b92de
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue Jun 6 11:45:41 2017 +1000
+
+    updated Tests
+
+commit 65cf80304074c483f92ae575203bd9a50985afe9
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue Jun 6 11:11:55 2017 +1000
+
+    More Error checking for customer type and location.
+
+commit f81c10cb89e0a27a6b105450efec775905730ad7
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue Jun 6 10:48:04 2017 +1000
+
+    Small adjustments. More tests
+
+commit 030648a6798a9d02df9eae07c66f2b2a447a3c82
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Mon Jun 5 19:57:28 2017 +1000
+
+    Added reset for customer couting lables and sucessful total calculation GUI
+
+commit 81f9f105d8e7973ec6439435b47973d7e46bcb2a
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 18:19:40 2017 +1000
+
+    JavaDoc generated
+
+commit d182a9cde64ae11783b0610455d79840ba992e28
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 17:14:01 2017 +1000
+
+    Documentation
+
+commit 3149231b5d1f34a32b35791dfe9e0ec68fc6d696
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 17:03:14 2017 +1000
+
+    Updated JDoc's
+
+commit 3755ff1f80bebec2f8c6ab43bd17a4a9efe351ec
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 16:57:52 2017 +1000
+
+    Commenting for PizzaGui
+
+commit 3bdd2a063d92d6ef56e5587dac549afc07924dc4
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 16:22:20 2017 +1000
+
+    Updated Documentation for Customers
+
+commit 2616be0b194ab10ec6332d0be54ac52f10db2b00
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 10:54:41 2017 +1000
+
+    Fixed exceptions. Rethrowing caught exception instead of throwing new exception.
+
+commit 083c6b34dc0c6e8d67d725ed13576f455faf9624
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Mon Jun 5 09:58:36 2017 +1000
+
+    updated getCustomerbyIndex
+
+commit 74cc10c0b546e5fc22878d514d5c8071d405e629
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Sat Jun 3 12:12:28 2017 +1000
+
+    Fixed name checking. Slightly changed the exception reasons.
+
+commit 03a282966fb8afdcef6aa1fdfd19c8c628e99275
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri Jun 2 16:10:24 2017 +1000
+
+    Changed the comboBox to Object type because duplicate string issue can cause issues.
+
+commit 5a59b63d261f6eb043a18005679cad5452677443
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri Jun 2 13:27:08 2017 +1000
+
+    Fixed loadLogFileButton try catch to correctly throw the correct statement. Updated Customer and other files.
+
+commit e8073a60f0facb18f8ca1dd4f34314ab8797315e
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri Jun 2 12:20:26 2017 +1000
+
+    Added Customer Record on GUI. Clarified exception throwing when parseInt. Corrected the Delivery Check
+
+commit c29e61e67ea8012f068bbca7eeed9bfd3649cd94
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu Jun 1 18:20:25 2017 +1000
+
+    Combobox item will now load the record.
+
+commit 9dfee12b72272bc98241238b4e33c65bbe6700f1
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu Jun 1 15:56:45 2017 +1000
+
+    Add single load details button and added next and previous record buttons
+
+commit e932b1c920dd794c240611c706cc28c72b174f34
+Merge: ad8f7a1 a0fc088
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu Jun 1 14:26:18 2017 +1000
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+
+commit ad8f7a15cd317cd715a83e4f9ba62f342bf33c03
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu Jun 1 14:24:46 2017 +1000
+
+    Removes items from the combobox at reset. Adjusted loghandlerpizzaTest to goto correct file location
+
+commit a0fc088e0b1db83afbfa290186190a4bdfce9f43
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Wed May 31 23:01:30 2017 +1000
+
+    Added delivery exception for out of date pizza
+
+commit b6e06d4161f4a7d800fe47a81aa6e6f923e8b703
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Wed May 31 22:34:12 2017 +1000
+
+    Corrected testing code and cleaned up
+
+commit c0e96956191948465ef6d4f357e1f05dc37e6996
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Wed May 31 11:33:58 2017 +1000
+
+    Added checks for delivery distance. Changed so open file opens dir to ./logs. Caught parseint exception and returned a customer exception
+
+commit 22f5cc0afab223dd1a636cbea2b957efc7fabb84
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Tue May 30 00:00:41 2017 -0700
+
+    Fixed display problems for totals (rounding) GUI
+
+commit 8d24b158e7561014e8bc45335a7992a80721e8ee
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Mon May 29 23:38:01 2017 -0700
+
+    Corrected some pizza issues
+
+commit 93815ec715c4634c70cd5b5d8648df1d248aaf6b
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Mon May 29 23:11:16 2017 -0700
+
+    Cleand up GUI Code (grouped and commented)
+
+commit dfc16239d051048ada3c56deef77f1f2b420aebd
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Mon May 29 21:11:57 2017 -0700
+
+    Fixed up most pizza related exceptions
+
+commit 886ad632adba6c8cac0373eeec037f39d343b180
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Mon May 29 18:38:58 2017 +1000
+
+    ActionPerformed Changes. Wrote some private methods to handle the actions. Exception handling and pushing them to the gui
+
+commit 0d93dbd6505d9f55a19b943c65bd8e6b84b0204a
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Mon May 29 16:31:21 2017 +1000
+
+    Moving inline ActionPerformed into method.
+
+commit b78731fa3b67b8550f148f58e785023ca17c11fa
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Mon May 29 14:34:24 2017 +1000
+
+    added the ability to remember the last place a file opened.
+
+commit 252b475f1a89b3895fc43007ad47dc904b782e04
+Merge: f911786 02cd515
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 26 13:12:29 2017 +1000
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+
+commit 02cd515300672518f3960fc0833c0ba56f5633aa
+Merge: 6c32aa2 3a251b9
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 26 13:08:49 2017 -0700
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+
+commit 6c32aa27c06d5281974dd872574ed8bcbd990c9d
+Merge: 4808648 393254a
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 26 13:08:11 2017 -0700
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+    
+    # Conflicts:
+    #       src/asgn2GUIs/PizzaGUI.java
+
+commit 4808648726f7e2ce0a07f51836f9d9b0a56093c8
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 26 13:03:39 2017 -0700
+
+    PizzaGUI: Added total calculations
+
+commit f91178650419314dc00c8ab09371cb0829133073
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 26 13:10:17 2017 +1000
+
+    Added the total customers to GUI
+
+commit 3a251b9142e579063d79c4e24caa6795f5406aee
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 26 13:05:13 2017 +1000
+
+    getTotalDeliveryDistance done
+
+commit 393254a944df4caaa69503e43082c44ea4a8eb38
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 26 13:01:04 2017 +1000
+
+    GUI Calculate totals done
+
+commit a75f25caf45b8a6d870b55037daeb7e70ddc88d2
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 26 12:52:58 2017 +1000
+
+    Changed from Mouse Events to action Events.
+
+commit faf100206ba5938607b0950301689f594f9a91fa
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 26 11:51:26 2017 +1000
+
+    Reversed changes from the merge that broke GUI
+
+commit a684035c79b444928ff328d9f5a4a73f07e8677c
+Merge: 527b130 12c43b5
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Fri May 26 10:04:37 2017 +1000
+
+    Merge remote-tracking branch 'origin/asgn2Pizzas_Package_Pizza_Classes'
+
+commit 527b130a05af499d159ec20331181926aa9b3759
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Fri May 26 10:04:13 2017 +1000
+
+    Exception changes.
+
+commit 12c43b553ff6ae56f3d4011de0785db75e5a7a51
+Merge: 8d0491f 24a406e
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Thu May 25 15:14:58 2017 -0700
+
+    Revert "Added some functionality to GUI"
+    
+    This reverts commit 8d0491f0c409b7f065b39d539222a0f64b115593.
+
+commit 8d0491f0c409b7f065b39d539222a0f64b115593
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Thu May 25 14:44:33 2017 -0700
+
+    Added some functionality to GUI
+
+commit ab17224585421b378dbb1917caa91214a04b6e23
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Thu May 25 10:44:22 2017 -0700
+
+    Trying to add LogHandlerException to file reader (Uncessessful)
+
+commit 58ff575af7864fe7d7c5d3a5e4000b74f653bb4e
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Thu May 25 10:23:06 2017 -0700
+
+    Updaated Pizza.java to work with tests, changed one line in test
+
+commit 80067faff94c9acd51a13410bac9229a28cd967b
+Merge: cbdd6a1 c429dbd
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Thu May 25 10:22:10 2017 -0700
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2 into asgn2Pizzas_Package_Pizza_Classes
+
+commit cbdd6a1fc1fda754ac52998242d937dc2c6f8628
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Wed May 24 23:49:59 2017 -0700
+
+    Cleaned up GUI code, still needs code for accessing PizzaRestaurant
+
+commit 24a406e612d389cd3657ca9c9e6b0d808427aeaa
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu May 25 15:00:53 2017 +1000
+
+    Fixed up PizzaGUI. Loads orders. Prints customers to ComboBox. Load order and customer buttons work and fill details.PizzaWizzard now working
+
+commit c429dbd02196175c380b39ddeadbbfffd7a3217e
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 19 13:37:16 2017 +1000
+
+    Cleaned up LogHandler code and more tests
+
+commit 1dd0acd7812467e5e025705644742b774c30dbaf
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 19 13:22:01 2017 +1000
+
+    Changed createPizza in loghandler to simpler code.
+
+commit ec929f417e68363f07644f957dfed4345b559f61
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Fri May 19 09:41:35 2017 +1000
+
+    Completed more code in LogHandler. and PizzaRestaurant. Tests in Loghandler done also
+
+commit 33aaef6e82e8e85c44adfeacde390454bd86ba2c
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu May 18 17:06:22 2017 +1000
+
+    Cleaning up and finishing tests
+
+commit 1f942206adfd32dd3857b124e24477bfb5f2d875
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu May 18 16:45:23 2017 +1000
+
+    Added more PizzaFactoryTests
+
+commit 65c7a2f109354031db661ea69dff1e1920ea7a83
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Thu May 18 14:10:01 2017 +1000
+
+    More code in LogHandler, pizzaRestaurant, pizzaRestaurantTests
+
+commit fda80e4b499ed009ef240b8a2d6f2e8ba0519b5e
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue May 16 11:15:14 2017 +1000
+
+    Started writing RestaurantPizza Tests
+
+commit 49aaa3c3b1fa39908c062200141f4594f975aba8
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue May 16 11:02:36 2017 +1000
+
+    PizzaFactoryTests
+
+commit f216a0c520b6dc0e4849ee6e89024461e06c0865
+Merge: 62bd430 8e772e2
+Author: Brodie <brodie.birkett@connect.qut.edu.au>
+Date:   Sun May 14 21:39:57 2017 -0700
+
+    Merged asgn2Pizzas_Package_Pizza_Classes into master
+
+commit 8e772e29e8f3f87565743ae80b75a8dd4d205bca
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Mon May 15 14:37:07 2017 -0700
+
+    Created the basic design for PizzaGUI, currently not accessing/calling other files.
+
+commit 867a0815c71249e44be01532564a63676bd0725d
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Sat May 13 01:16:32 2017 -0700
+
+    Coding done for most Pizzas Package classes
+
+commit d319c08975e50c8124831890be02f97fe7aa637b
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Sat May 13 01:14:40 2017 -0700
+
+    Coding done for most of Pizza Package
+
+commit 62bd4300ba314ee056ba41128dba910df8575e04
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 21:15:12 2017 -0700
+
+    Wrote tests for LogHandlerCustomerTests.java and CaustomerFactoryTests.java
+
+commit f93ba321cc4dae1cf52417126025111d1427c24f
+Merge: 4274b95 378ffb8
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 18:12:37 2017 -0700
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+
+commit 4274b9560261c6886a218839bea2d9dcec01bd47
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 18:11:00 2017 -0700
+
+    Finished tests for RestaurantCustomerTests.java and added log files used for testing.
+
+commit 15848b0fc19371d88cc91a44354434b3f59f1c2d
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 15:36:56 2017 -0700
+
+    Added some imports to PizzaResturant.java and started tests for RestaurantCustomerTests.java
+
+commit d2150d044f855fbde28fae6d7db34aeaeee62533
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 15:36:02 2017 -0700
+
+    Removed unused imports CustomerTests.java
+
+commit e7c3d843482106f1f28df13cc976703e197b56dd
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 14:18:08 2017 -0700
+
+    Completed CustomerTests
+
+commit ee0fed97456246ceb69ac13960309d621294292f
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 12 13:25:32 2017 -0700
+
+    Started writing tests for CustomerTests.java
+
+commit 378ffb8f3b20ca388b7db95400656632cc0503a2
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 12 16:34:59 2017 +1000
+
+    Fixed Math
+
+commit a7a1ac8686268099cf8064ae83189e64f45a781c
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue May 9 15:55:14 2017 +1000
+
+    Customer Work done.
+
+commit 4058a7f8aa7d0b38b4e0d5362ce29c44f55d12d1
+Author: ZEUS\Peter <pschwartz914@gmail.com>
+Date:   Tue May 9 12:35:55 2017 +1000
+
+    Added a bunch of tests for Pizza
+
+commit 7b3b1848539229290be977013d5d537b284dfaac
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 5 12:56:02 2017 +1000
+
+    Started Writing Pizza Tests
+
+commit 078d8e13240f130a3b11baed071647965b7c0e1e
+Merge: d6c45e7 931a3ba
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 5 12:52:39 2017 +1000
+
+    Merge branch 'master' of https://bitbucket.org/schwartz914/cab302_assign2
+
+commit 931a3ba9a3b59fe89cb172669dfced97f9dd6938
+Author: Brodie Birko <brodie.birkett@connect.qut.edu.au>
+Date:   Fri May 5 00:24:29 2017 -0700
+
+    Added test outlines (in comments) for CustomerFactoryTests, CustomerTests, LogHandlerCustomerTests and RestaurantCustomerTests classes.
+
+commit d6c45e726bdd3ba5b990eba11af5f15c08e3edaf
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Fri May 5 12:51:49 2017 +1000
+
+    Started Writing Tests for Pizza
+
+commit 07f9fde81321a9f02d587175eb4751ebdf41d7ff
+Author: DESKTOP-LHAPPQM\Schwa <pschwartz914@gmail.com>
+Date:   Sun Apr 30 20:39:31 2017 +1000
+
+    Assignment2 Files
